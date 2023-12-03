@@ -27,4 +27,26 @@ class User
         $users = DB::execute($sql, $data);
         return $users;
     }
+    public function checkUsername($email)
+    {
+        $sql = "select * from users where username = ?";
+        $data = array($email);
+        $insert = DB::execute($sql, $data);
+        return !empty($insert);
+    }
+    public function checkPassword($data)
+    {
+        $sql = "select * from users where username = ? and password = ?";
+        $insert = DB::execute($sql, $data);
+        return !empty($insert);
+    }
+    public function login($data)
+    {
+        if ($this->checkUsername($data[0])) {
+            if ($this->checkPassword($data))
+                return true;
+            return "Mật khẩu sai !";
+        }
+        return "Username không tồn tại !";
+    }
 }

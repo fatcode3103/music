@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
         if ($res === true) {
             // Login successful, redirect to home page
             setcookie("username", $username, time() + 3600, "/");
-            header("Location: signup.html");
+            header("Location: ../fe/home.html");
         } else {
             $error_message = $res;
         }
@@ -23,6 +23,6 @@ if (isset($_POST['submit'])) {
     }
     echo "<script type='text/javascript'>
             alert('$error_message');
-            window.location.href = 'login.html';
+            window.location.href = '../fe/login.html';
           </script>";
 }

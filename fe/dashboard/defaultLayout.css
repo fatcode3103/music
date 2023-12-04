@@ -74,4 +74,5 @@
 .body {
     display: flex;
     align-items: flex-start;
+    height: 100%;
 }

@@ -142,10 +142,6 @@ th {
     padding: 16px;
 }
 
-tr:nth-child(even) {
-    background-color: #08090a;
-}
-
 table tr td:first-child {
     width: 4%;
     text-align: center;

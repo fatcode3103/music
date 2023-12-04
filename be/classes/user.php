@@ -7,7 +7,7 @@ class User
 
     static public function getAllUsers()
     {
-        $sql = "select * from user";
+        $sql = "select * from users";
         $users = DB::execute($sql);
         return $users;
     }
@@ -48,5 +48,12 @@ class User
             return "Mật khẩu sai !";
         }
         return "Username không tồn tại !";
+    }
+    function deleteUserById($userId)
+    {
+        $sql = "delete from users where user_id = ?;";
+        $data = array($userId);
+        $res = DB::execute($sql, $data);
+        return $res;
     }
 }

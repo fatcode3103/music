@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const currentUrl = window.location.href;
 
     // Lấy danh sách các link trong navbar
-    const navLinks = document.querySelectorAll("navbar-item");
+    const navLinks = document.querySelectorAll(".navbar-item");
 
     // Duyệt qua từng link và kiểm tra nếu URL của link trùng với URL hiện tại thì thêm class 'active'
     navLinks.forEach((link) => {
@@ -12,3 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+function toggleMenu() {
+    var menu = document.getElementById("menu-admin");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}

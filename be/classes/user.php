@@ -13,8 +13,8 @@ class User
     }
     public function signup($user)
     {
-        $sql = "insert into users(username, password)
-        values('" . $user['username'] . "','" . $user['password'] . "')";
+        $sql = "insert into users(name, username, password)
+        values('" . $user['name'] . "','" . $user['username'] . "','" . $user['password'] . "')";
         $insert = DB::execute($sql);
         return $insert;
     }

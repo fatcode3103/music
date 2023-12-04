@@ -1,7 +1,14 @@
 <?php
 include "classes/user.php";
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['admin'])) {
+    if ($_POST['username'] == "admin" && $_POST['password'] == "admin") {   // hard code for admin :D
+        setcookie("admin", "true", time() + 3600, "/");
+        header("Location: ../../fe/dashboard/userManagement/userManagement.html");
+    } else {
+        header("Location: ../../fe/dashboard/login/login.html?error=true");
+    }
+} else {
     if ($_POST['username'] != "" && $_POST['password'] != "") {
         $user = new User();
 

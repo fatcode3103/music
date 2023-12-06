@@ -39,7 +39,7 @@ a:hover,
 a:active,
 a:focus {
   outline: none;
-  text-decoration: none;
+  text-decoration: none!important;
 }
 input,
 textarea,
@@ -189,7 +189,23 @@ body::-webkit-scrollbar-thumb {
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 .owl-carousel .owl-item {
-  -webkit-transform: none;
+  -webkit-tr: none;
+}
+.login-from{
+  display: flex;
+  justify-content: center;
+}
+.login-form-btn{
+  padding: 10px;
+  color: #c0c0c0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.login-form-btn:hover{
+  background-color: #212529;
+  color: #fff;
+  text-decoration: none;
 }
 /*==============================
 	Sidebar
@@ -296,7 +312,7 @@ body::-webkit-scrollbar-thumb {
 .sidebar__nav-item:last-child {
   margin-bottom: 0;
 }
-.sidebar__menu {
+/* .sidebar__menu {
   padding: 0;
   display: block;
   width: 100%;
@@ -305,17 +321,17 @@ body::-webkit-scrollbar-thumb {
   background-color: #222227;
   transition: 0.4s ease;
   height: auto;
-}
-.sidebar__menu--scroll {
+} */
+/* .sidebar__menu--scroll {
   height: 165px;
   overflow: hidden;
-}
-.sidebar__menu li {
+} */
+/* .sidebar__menu li {
   padding: 0 0 0 49px;
   margin-bottom: 15px;
   position: relative;
-}
-.sidebar__menu li:before {
+} */
+/* .sidebar__menu li:before {
   content: '';
   position: absolute;
   display: block;
@@ -356,7 +372,7 @@ body::-webkit-scrollbar-thumb {
 }
 .sidebar--active {
   transform: translateX(0);
-}
+} */
 @media (min-width: 576px) {
   .sidebar__logo {
     padding: 0 30px;
@@ -370,7 +386,7 @@ body::-webkit-scrollbar-thumb {
   .sidebar__menu li:before {
     left: 40px;
   }
-}
+} 
 @media (min-width: 1200px) {
   .sidebar {
     transform: translateX(0);
@@ -378,7 +394,7 @@ body::-webkit-scrollbar-thumb {
   .sidebar__nav {
     max-height: calc(100vh - 332px);
   }
-}
+} 
 /* ==============================
 	Header
 ==============================*/
@@ -487,7 +503,7 @@ body::-webkit-scrollbar-thumb {
     width: 100%;
   }
   .header__action-btn span {
-    display: none;
+    display: none; 
   }
   .header__action-btn svg {
     width: 24px;
@@ -912,6 +928,61 @@ body::-webkit-scrollbar-thumb {
     }
   }
   
+  /*==============================
+	content
+==============================*/
+.content-singers {
+  margin-right: 0;
+  margin:auto;
+  padding: 20px;
+  padding-left: 22%;
+  background-color: #212529; /* Màu nền tối */
+  color: white; /* Màu chữ trắng */
+}
+.title-singers{
+  margin: 20px 0;
+
+}
+h1 {
+  font-size: 36px;
+  font-weight: 500;
+  font-family: sans-serif;
+  color: #c0c0c0;
+  padding-left: 13px;
+}
+.contact-info {
+  text-align: left;
+  margin-top: 20px;
+  padding: 20px 0;
+}
+.contact-info p {
+  margin-bottom: 10px;
+  color: #c0c0c0;
+  margin: 15px;
+}
+.contact-info a{
+  color: #fff;
+}
+.contact-info a:hover{
+  color: #25a56a;
+}
+
+
+
+
+button {
+  padding: 10px;
+  /* background-color: #1DB954; */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+
+
+
   /*==============================
 	Footer
 ==============================*/

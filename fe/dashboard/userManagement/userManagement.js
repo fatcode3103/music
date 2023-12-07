@@ -12,6 +12,23 @@ document.addEventListener("DOMContentLoaded", (e) => {
         }
     });
 
+    let cookieName = "username";
+
+    let cookies = document.cookie.split(";");
+    let cookieValue = null;
+
+    for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+        if (cookie.indexOf(cookieName + "=") === 0) {
+            cookieValue = cookie.substring(
+                (cookieName + "=").length,
+                cookie.length
+            );
+            break;
+        }
+    }
+    console.log(cookieValue);
+
     //all users
     getAllUsers();
 });

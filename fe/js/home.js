@@ -7,6 +7,14 @@ let dots = document.querySelectorAll('.slider .dots li');
 
 let lengthItems = items.length - 1;
 let active = 0;
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     if (localStorage.getItem('loggedIn') !== 'true') {
+// 		// Chuyển hướng đến trang đăng nhập
+// 		window.location.href = 'login.html';
+// 	}
+// });
+
 next.onclick = function(){
     active = active + 1 <= lengthItems ? active + 1 : 0;
     reloadSlider();

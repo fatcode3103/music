@@ -21,7 +21,7 @@ if (isset($_POST['admin'])) {
         if ($res === true) {
             // Login successful, redirect to home page
             setcookie("username", $username, time() + 3600, "/");
-            // header("Location: ../fe/ablums.php");
+            header("Location: ../fe/index.html");
         } else {
             $error_message = $res;
         }

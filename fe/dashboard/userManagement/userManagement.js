@@ -12,11 +12,16 @@ document.addEventListener("DOMContentLoaded", (e) => {
         }
     });
 
-    let cookieName = "username";
+    //all users
+    getAllUsers();
 
+    redirectAdminAfterLogin();
+});
+
+const redirectAdminAfterLogin = () => {
+    let cookieName = "username";
     let cookies = document.cookie.split(";");
     let cookieValue = null;
-
     for (let i = 0; i < cookies.length; i++) {
         let cookie = cookies[i].trim();
         if (cookie.indexOf(cookieName + "=") === 0) {
@@ -27,11 +32,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
             break;
         }
     }
-    console.log(cookieValue);
-
-    //all users
-    getAllUsers();
-});
+    if (cookieValue !== "admin") {
+        window.location.href = "../login/login.html";
+    }
+};
 
 const toggleMenu = () => {
     var menu = document.getElementById("menu-admin");

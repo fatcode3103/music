@@ -3,7 +3,7 @@ body{
 	font-family: 'Poppins', sans-serif;
 	font-weight: 300;
 	line-height: 1.7;
-	color: #c0c0c0;
+	color: #fff;
 	background-color: #1f2029;
   overflow: hidden;
   height: 100vh;
@@ -13,7 +13,7 @@ a:hover {
 	text-decoration: none;
 }
 .link {
-  color: #ffeba7;
+  color: #25a56a;
 }
 .link:hover {
   color: #c4c3ca;
@@ -52,7 +52,7 @@ display: none;
   padding: 0;
   margin: 10px auto;
   cursor: pointer;
-  background-color: #ffeba7;
+  background-color: #31d689;
 }
 .checkbox:checked + label:before,
 .checkbox:not(:checked) + label:before{
@@ -61,7 +61,7 @@ display: none;
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  color: #ffeba7;
+  color: #31d689;
   background-color: #020305;
   font-family: 'unicons';
   content: '\eb4f';
@@ -136,7 +136,7 @@ display: none;
   line-height: 22px;
   letter-spacing: 0.5px;
   outline: none;
-  color: #c4c3ca;
+  color: #c0c0c0;
   background-color: #1f2029;
   border: none;
   -webkit-transition: all 200ms linear;
@@ -151,6 +151,7 @@ display: none;
 }
 .input-icon {
   position: absolute;
+  color: #c0c0c0;
   top: 0;
   left: 18px;
   height: 48px;
@@ -174,11 +175,27 @@ display: none;
   display: -ms-inline-flexbox;
   display: inline-flex;
   align-items: center;
-  background-color: #ffeba7;
-  color: #000000;
+  background-color: #31d689;
+  color: #fff;
 }
 .btn:hover{  
   background-color: #000000;
-  color: #ffeba7;
+  color: #fff;
   box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+}
+.login-admin{
+  margin-top: 16px;
+  font-family: sans-serif;
+  font-size: 16px;
+  color: #c0c0c0;
+}
+.login-admin a{
+  color: #c0c0c0;
+  text-decoration: underline;
+}
+.login-admin a:hover{
+  color: rgb(103, 103, 243);
+}
+.btn-login{
+  margin-top: 2px!important;
 }

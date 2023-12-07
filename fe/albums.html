@@ -48,7 +48,7 @@
             <form action="" method="post">
 
                 <div class="login-form">
-                    <a class="login-form-btn" type="submit">Đăng nhập</a>
+                    <a class="login-form-btn" type="submit" href="login.html">Đăng nhập</a>
                 </div>
             </form>
         </div>
@@ -89,14 +89,14 @@
         </li>
 
         <li class="sidebar__nav-item">
-            <a href="./ablums.html" class="sidebar__nav-link releases"><svg xmlns="http://www.w3.org/2000/svg"
+            <a href="#" class="sidebar__nav-link releases"><svg xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24">
                     <path
                         d="M21.65,2.24a1,1,0,0,0-.8-.23l-13,2A1,1,0,0,0,7,5V15.35A3.45,3.45,0,0,0,5.5,15,3.5,3.5,0,1,0,9,18.5V10.86L20,9.17v4.18A3.45,3.45,0,0,0,18.5,13,3.5,3.5,0,1,0,22,16.5V3A1,1,0,0,0,21.65,2.24ZM5.5,20A1.5,1.5,0,1,1,7,18.5,1.5,1.5,0,0,1,5.5,20Zm13-2A1.5,1.5,0,1,1,20,16.5,1.5,1.5,0,0,1,18.5,18ZM20,7.14,9,8.83v-3L20,4.17Z" />
                 </svg> <span>Album nhạc</span></a>
         </li>
         <li class="sidebar__nav-item">
-            <a href="#" class="sidebar__nav-link contacts"><svg xmlns="http://www.w3.org/2000/svg"
+            <a href="contacts.html" class="sidebar__nav-link contacts"><svg xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24">
                     <path
                         d="M16,14H8a1,1,0,0,0,0,2h8a1,1,0,0,0,0-2Zm0-4H10a1,1,0,0,0,0,2h6a1,1,0,0,0,0-2Zm4-6H17V3a1,1,0,0,0-2,0V4H13V3a1,1,0,0,0-2,0V4H9V3A1,1,0,0,0,7,3V4H4A1,1,0,0,0,3,5V19a3,3,0,0,0,3,3H18a3,3,0,0,0,3-3V5A1,1,0,0,0,20,4ZM19,19a1,1,0,0,1-1,1H6a1,1,0,0,1-1-1V6H7V7A1,1,0,0,0,9,7V6h2V7a1,1,0,0,0,2,0V6h2V7a1,1,0,0,0,2,0V6h2Z">
@@ -116,36 +116,37 @@
     <div class="title-albums">
         <h1>Album</h1>
     </div>
-    <div class="search-box-albums">
-        <div class="search-container-albums">
-            <input type="text" id="album-search" name="album-search" placeholder="Search...">
+
+    <form action="" method="post">
+        <div class="search-box-albums">
+            <div class="search-container-albums">
+                <input type="text" id="album-search" name="album-search" placeholder="Search...">
+            </div>        
         </div>
-        
-    </div>
-   
+    </form> 
     
     <div class="albums-container" >
         <div class="album" onclick="viewArtistDetails(event)">
-            <a href="album_detail.html">
-                <img src="./img/covers/cover1.jpg" alt="Album 1">
+            <a href="#">
+                <img src="./img/album/cover1.jpg" alt="Album 1">
                 <span class="name_album">Space Melody</span>
-                <span><a class="name_artist" href="artist_detail.html">VIZE</a></span>
+                <span><a class="name_artist" href="#">VIZE</a></span>
                 <span class="play-icon material-icons">play_circle_outline</span>
             </a>
         </div>
         <div class="album" onclick="viewArtistDetails(event)">
-            <a href="album_detail.html">
-                <img src="./img/covers/cover2.jpg" alt="Album 2">
+            <a href="#">
+                <img src="./img/album/cover2.jpg" alt="Album 2">
                 <span class="name_album">B.S.N.L</span>
-                <span><a class="name_artist" href="artist_detail.html">Bray</a></span>
+                <span><a class="name_artist" href="#">Bray</a></span>
                 <span class="play-icon material-icons">play_circle_outline</span>
             </a>
         </div>
         <div class="album" onclick="viewArtistDetails(event)">
-            <a href="album_detail.html">
-                <img src="./img/covers/cover6.jpg" alt="Album 3">
+            <a href="#">
+                <img src="./img/album/cover6.jpg" alt="Album 3">
                 <span class="name_album">Prime Day</span>
-                <span><a class="name_artist" href="artist_detail.html"></a></span>
+                <span><a class="name_artist" href="#">Billie Eilish</a></span>
                 <span class="play-icon material-icons">play_circle_outline</span>
             </a>
         </div>
@@ -181,30 +182,29 @@
                 <div class="footer__nav">
                     <a href="#">Về chúng tôi</a>
                     <a href="#">Tài khoản</a>
-                    <a href="#">Giá gói cước</a>
-                    <a href="#">Liên hệ</a>
+                    <a href="./contacts.html">Liên hệ</a>
                 </div>
             </div>
 
             <div class="col-md">
                 <h6 class="footer__title">Các trang</h6>
                 <div class="footer__nav">
-                    <a href="#">Trang quản trị</a>
-                    <a href="#">Nghệ sĩ</a>
-                    <a href="#">Bản phát hành</a>
+                    <a href="./index.html">Trang chủ</a>
+                    <a href="./singers.html">Nghệ sĩ</a>
+                    <a href="./albums.html">Album nhạc</a>
                 </div>
             </div>
 
             <div class="col-md">
                 <h6 class="footer__title">Trợ giúp</h6>
                 <div class="footer__nav">
-                    <a href="#">Hóa đơn & Tài khoản</a>
-                    <a href="#">Kế hoạch & Gói cước</a>
+                    <a href="#">Tài khoản</a>
                     <a href="#">Hỗ trợ đa thiết bị</a>
                     <a href="#">Khả năng tiếp cận</a>
                 </div>
             </div>
         </div>
+
 
         <div class="row">
             <div class="col-12">
@@ -321,8 +321,8 @@
     // Xử lý chuyển hướng hoặc hiển thị thông tin chi tiết của nghệ sĩ
     // ...
 
-    // Ví dụ: chuyển hướng đến trang chi tiết nghệ sĩ
-    window.location.href = "artist_details.html";
+    // Ví dụ: chuyển hướng đến trang album
+    window.location.href = "#";
 }
 
 </script>

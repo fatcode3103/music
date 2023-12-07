@@ -1,0 +1,15 @@
+<?php
+include_once "./classes/user.php";
+
+$user = new User();
+
+echo $_POST['user_id'];
+
+if (isset($_POST['user_id'])) {
+    $userId = $_POST['user_id'];
+    $result = $user->deleteUserById($userId);
+} else {
+    echo json_encode(['error' => 'Missing user_id parameter']);
+}
+
+exit();

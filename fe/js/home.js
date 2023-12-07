@@ -1,60 +1,77 @@
-
-let slider = document.querySelector('.slider .list');
-let items = document.querySelectorAll('.slider .list .item');
-let next = document.getElementById('next');
-let prev = document.getElementById('prev');
-let dots = document.querySelectorAll('.slider .dots li');
+let slider = document.querySelector(".slider .list");
+let items = document.querySelectorAll(".slider .list .item");
+let next = document.getElementById("next");
+let prev = document.getElementById("prev");
+let dots = document.querySelectorAll(".slider .dots li");
 
 let lengthItems = items.length - 1;
 let active = 0;
 
-// document.addEventListener("DOMContentLoaded", function () {
-//     if (localStorage.getItem('loggedIn') !== 'true') {
-// 		// Chuyển hướng đến trang đăng nhập
-// 		window.location.href = 'login.html';
-// 	}
-// });
+document.addEventListener("DOMContentLoaded", function () {
+    redirectUserAfterLogin();
+});
 
-next.onclick = function(){
+const redirectUserAfterLogin = () => {
+    let cookieName = "username";
+    let cookies = document.cookie.split(";");
+    let cookieValue = null;
+    for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+        if (cookie.indexOf(cookieName + "=") === 0) {
+            cookieValue = cookie.substring(
+                (cookieName + "=").length,
+                cookie.length
+            );
+            break;
+        }
+    }
+    if (cookieValue !== "user") {
+        window.location.href = "./login.html";
+    }
+};
+
+next.onclick = function () {
     active = active + 1 <= lengthItems ? active + 1 : 0;
     reloadSlider();
-}
-prev.onclick = function(){
+};
+prev.onclick = function () {
     active = active - 1 >= 0 ? active - 1 : lengthItems;
     reloadSlider();
-}
-let refreshInterval = setInterval(()=> {next.click()}, 3000);
-function reloadSlider(){
-    slider.style.left = -items[active].offsetLeft + 'px';
-    // 
-    let last_active_dot = document.querySelector('.slider .dots li.active');
-    last_active_dot.classList.remove('active');
-    dots[active].classList.add('active');
+};
+let refreshInterval = setInterval(() => {
+    next.click();
+}, 3000);
+function reloadSlider() {
+    slider.style.left = -items[active].offsetLeft + "px";
+    //
+    let last_active_dot = document.querySelector(".slider .dots li.active");
+    last_active_dot.classList.remove("active");
+    dots[active].classList.add("active");
 
     clearInterval(refreshInterval);
-    refreshInterval = setInterval(()=> {next.click()}, 3000);
-
-    
+    refreshInterval = setInterval(() => {
+        next.click();
+    }, 3000);
 }
 
 dots.forEach((li, key) => {
-    li.addEventListener('click', ()=>{
-         active = key;
-         reloadSlider();
-    })
-})
-window.onresize = function(event) {
+    li.addEventListener("click", () => {
+        active = key;
+        reloadSlider();
+    });
+});
+window.onresize = function (event) {
     reloadSlider();
 };
 /*==============================
 	Player
 	==============================*/
-	$('.player__btn').on('click', function () {
-		$(this).toggleClass('player__btn--active');
-		$('.player').toggleClass('player--active');
-	});
+$(".player__btn").on("click", function () {
+    $(this).toggleClass("player__btn--active");
+    $(".player").toggleClass("player--active");
+});
 
-	const controls = `
+const controls = `
 	<div class="plyr__controls">
 		<div class="plyr__actions">
 			<button type="button" class="plyr__control plyr__control--prev">
@@ -100,19 +117,19 @@ window.onresize = function(event) {
 		</div>
 	</div>
 	`;
-	var player = new Plyr('#audio', {
-		controls,
-		volume: 0.5,
-	});
+var player = new Plyr("#audio", {
+    controls,
+    volume: 0.5,
+});
 
-	var audio = $('#audio');
+var audio = $("#audio");
 
-	player.on('play', event => {
-		$('a[data-link].active, a[data-playlist].active').addClass('play');
-		$('a[data-link].active, a[data-playlist].active').removeClass('pause');
-	});
+player.on("play", (event) => {
+    $("a[data-link].active, a[data-playlist].active").addClass("play");
+    $("a[data-link].active, a[data-playlist].active").removeClass("pause");
+});
 
-	player.on('pause', event => {
-		$('a[data-link].active, a[data-playlist].active').removeClass('play');
-		$('a[data-link].active, a[data-playlist].active').addClass('pause');
-	});
+player.on("pause", (event) => {
+    $("a[data-link].active, a[data-playlist].active").removeClass("play");
+    $("a[data-link].active, a[data-playlist].active").addClass("pause");
+});

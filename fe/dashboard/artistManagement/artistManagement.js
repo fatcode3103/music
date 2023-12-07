@@ -11,7 +11,28 @@ document.addEventListener("DOMContentLoaded", function () {
             link.classList.add("active");
         }
     });
+
+    redirectAdminAfterLogin();
 });
+
+const redirectAdminAfterLogin = () => {
+    let cookieName = "username";
+    let cookies = document.cookie.split(";");
+    let cookieValue = null;
+    for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+        if (cookie.indexOf(cookieName + "=") === 0) {
+            cookieValue = cookie.substring(
+                (cookieName + "=").length,
+                cookie.length
+            );
+            break;
+        }
+    }
+    if (cookieValue !== "admin") {
+        window.location.href = "./dashboard/login/login.html";
+    }
+};
 
 function toggleMenu() {
     var menu = document.getElementById("menu-admin");

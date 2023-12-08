@@ -554,10 +554,13 @@ body::-webkit-scrollbar-thumb {
 .plyr--full-ui input[type="range"] {
   color: #25a56a;
 }
-.audio{
-  background-color: red !important;
-  width: 50%;
+.audio #audio {
+  /* background-color: red !important; */
+  height: 50px;
+  width: 100%;
+  border-radius: 50rem;
 }
+
 /* ==============================
 	Header
 ==============================*/

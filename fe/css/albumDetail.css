@@ -938,7 +938,7 @@ body::-webkit-scrollbar-thumb {
   margin:auto;
   padding: 20px;
   padding-left: 22%;
-  background-color: #16151a!important; /* Màu nền tối */
+  background-color: #212529!important; /* Màu nền tối */
   color: white; /* Màu chữ trắng */
 }
 .title-name-album{
@@ -1215,7 +1215,7 @@ button {
 ==============================*/
 .footer {
   width: 100%!important;
-  background-color: #222227;
+  background-color: #222227!important;
   padding: 30px 0 20px; 
   position: relative;
   overflow: hidden;
@@ -1387,8 +1387,5 @@ button {
     width: auto;
   }
 }
-
-
-
 
 

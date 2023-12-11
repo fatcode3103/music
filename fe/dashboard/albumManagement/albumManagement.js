@@ -1,4 +1,10 @@
 const btnLogoutElement = document.querySelector(".btn-logout");
+const loaderElement = document.querySelector(".loader");
+
+function updateLoaderDisplay(isLoading) {
+    loaderElement.style.display = isLoading ? "block" : "none";
+}
+
 btnLogoutElement.onclick = async () => {
     try {
         const params = new URLSearchParams();
@@ -21,7 +27,7 @@ btnLogoutElement.onclick = async () => {
     }
 };
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async () => {
     // Lấy URL hiện tại
     const currentUrl = window.location.href;
 
@@ -37,6 +43,42 @@ document.addEventListener("DOMContentLoaded", function () {
 
     redirectAdminAfterLogin();
 });
+
+const getAllAlbum = async () => {
+    try { 
+        const res = await fetch("http://localhost:3000/be/album.php");
+        if (res.ok && res.status === 200) {
+            const allAlbums = await res.json();
+            console.log("allAlbum:>>> ", allAlbums);
+            return allAlbums;
+        } else {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+const displayAlbumToTable = async (albums) => {
+    const tableElement = document.getElementsByTagName("table");
+    albums.forEach((item, index) => {
+        const row = document.createElement("tr");
+        row.setAttribute("data-item-id", item.release_id);
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${item.rel_name || "-"}</td>
+            <td>${item.stage_name || "-"}</td>            
+            <td>${item.numberOfTracks || "-"}</td>
+            <td>
+                <i
+                    class="fa-regular fa-pen-to-square btn-edit"
+                ></i>
+                <i class="fa-regular fa-trash-can"></i>
+            </td>
+        `;
+        tableElement[0].appendChild(row);
+    });
+};
 
 const redirectAdminAfterLogin = () => {
     let cookieValue = "";

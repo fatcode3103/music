@@ -7,28 +7,7 @@ let dots = document.querySelectorAll(".slider .dots li");
 let lengthItems = items.length - 1;
 let active = 0;
 
-document.addEventListener("DOMContentLoaded", function () {
-    redirectUserAfterLogin();
-});
-
-const redirectUserAfterLogin = () => {
-    let cookieName = "username";
-    let cookies = document.cookie.split(";");
-    let cookieValue = null;
-    for (let i = 0; i < cookies.length; i++) {
-        let cookie = cookies[i].trim();
-        if (cookie.indexOf(cookieName + "=") === 0) {
-            cookieValue = cookie.substring(
-                (cookieName + "=").length,
-                cookie.length
-            );
-            break;
-        }
-    }
-    if (cookieValue !== "user") {
-        window.location.href = "./login.html";
-    }
-};
+document.addEventListener("DOMContentLoaded", function () {});
 
 next.onclick = function () {
     active = active + 1 <= lengthItems ? active + 1 : 0;

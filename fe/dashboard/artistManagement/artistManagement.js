@@ -1,9 +1,13 @@
 const btnLogoutElement = document.querySelector(".btn-logout");
 const loaderElement = document.querySelector(".loader");
+const addSingerBtn = document.querySelector(
+    ".wrapper-btn-new-singer button[data-bs-target='#exampleModal']"
+);
 
 let totalPages = 0;
 let currentPage = 1;
 let recordsPerPage = 5;
+let modalMode = "add"; // Default mode is "add"
 
 const prevPage = () => {
     if (currentPage > 1) {
@@ -24,6 +28,11 @@ const nextPage = () => {
 function updateLoaderDisplay(isLoading) {
     loaderElement.style.display = isLoading ? "block" : "none";
 }
+
+addSingerBtn.addEventListener("click", () => {
+    modalMode = "add";
+    clearModalFields();
+});
 
 btnLogoutElement.onclick = async () => {
     try {
@@ -127,7 +136,9 @@ const displaySingersToTable = async (singers) => {
             <td>${item.si_name || "-"}</td>
             <td>${item.numberOfReleases || "-"}</td>
             <td>
-                <i class="fa-regular fa-pen-to-square btn-edit"></i>
+                <i class="fa-regular fa-pen-to-square btn-edit" onclick="getSingerById(${
+                    item.singer_id
+                })"></i>
                 <i onclick="deleteSingerById(${
                     item.singer_id
                 })" class="fa-regular fa-trash-can"></i>
@@ -176,7 +187,11 @@ function addNewSingerHandler() {
     ).value;
     const biography = document.querySelector("#exampleModal textarea").value;
 
-    addNewSinger(stageName, realName, imageUrl, introduction, biography);
+    if (modalMode === "add") {
+        addNewSinger(stageName, realName, imageUrl, introduction, biography);
+    } else if (modalMode === "edit") {
+        editSingerById(stageName, realName, imageUrl, introduction, biography);
+    }
 }
 
 const addNewSinger = async (
@@ -259,6 +274,47 @@ const deleteSingerById = async (singerId) => {
             },
         }).showToast();
     }
+};
+
+const getSingerById = async (singerId) => {
+    try {
+        const myModal = new bootstrap.Modal(
+            document.getElementById("exampleModal")
+        );
+        myModal.show();
+        modalMode = "edit";
+        const res = await fetch(
+            `http://localhost:3000/be/getSingerById.php?singerId=${singerId}`
+        );
+        if (res.ok && res.status === 200) {
+            const result = await res.json();
+            fillModalForEdit(result[0]);
+            console.log(result[0]);
+        } else {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+const editSingerById = () => {};
+
+const fillModalForEdit = (singerDetails) => {
+    document.querySelector(
+        "#exampleModal input[placeholder='Nhập tên nghệ danh']"
+    ).value = singerDetails.stage_name || "";
+    document.querySelector(
+        "#exampleModal input[placeholder='Nhập tên nghệ sĩ']"
+    ).value = singerDetails.si_name || "";
+    document.querySelector(
+        "#exampleModal input[placeholder='Chèn link ảnh']"
+    ).value = singerDetails.image || "";
+    document.querySelector(
+        "#exampleModal input[placeholder='Giới thiệu sơ bộ']"
+    ).value = singerDetails.subtitle || "";
+    document.querySelector("#exampleModal textarea").value =
+        singerDetails.about || "";
 };
 
 function clearModalFields() {

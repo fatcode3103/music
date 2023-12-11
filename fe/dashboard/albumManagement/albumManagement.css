@@ -186,3 +186,10 @@ table tr td:last-child i:hover {
 .wrapper-btn-new-singer {
     text-align: right;
 }
+/*  */
+.name-album{
+    text-align: left;
+}
+.form-label{
+    left: 10px;
+}

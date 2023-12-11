@@ -18,19 +18,11 @@ if (isset($_GET['submit']))
             'singer_id' => $_POST['singer_id']
         );
         $release_model->addAlbum($release);
+        echo "<script type='text/javascript'>
+            window.alert('Them thanh cong');
+            </script>";
     } else {
         echo "<script type='text/javascript'>
             window.alert('Chưa nhập đủ thông tin!');
             </script>";
     }
-
-
-//Get all album
-
-$allAlbums = new Release;
-echo json_encode($allAlbums->getAllAlbum());
-exit();
-
-//Delete Album by ID
-
-

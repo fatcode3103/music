@@ -97,3 +97,4 @@ function toggleMenu() {
     var menu = document.getElementById("menu-admin");
     menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
+

@@ -22,16 +22,19 @@ if (isset($_POST['submit']))
             //Đăng ký thành công và thông báo
             echo "<script type='text/javascript'>
             window.alert('Đăng kí thành công');
+            window.location.href = '../fe/login.html';
             </script>";
             
         } else {
             echo "<script type='text/javascript'>
             window.alert('Trùng tên đăng nhập!');
+            window.location.href = '../fe/login.html';
             </script>";
                        
         }
     } else {
         echo "<script type='text/javascript'>
             window.alert('Chưa nhập đủ thông tin!');
+            window.location.href = '../fe/login.html';
             </script>";
     }

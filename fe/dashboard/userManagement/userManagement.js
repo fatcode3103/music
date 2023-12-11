@@ -33,8 +33,7 @@ const redirectAdminAfterLogin = () => {
         cookieValue = parts.pop().split(";").shift();
     }
     if (cookieValue !== "admin") {
-        window.location.href =
-            "http://localhost:3000/fe/dashboard/login/login.html";
+        window.location.href = "../../../fe/dashboard/login/login.html";
     }
 };
 
@@ -57,8 +56,7 @@ btnLogoutElement.onclick = async () => {
         if (!response.ok || response.status !== 200) {
             alert("Logout failed !");
         } else {
-            window.location.href =
-                "http://localhost:3000/fe/dashboard/login/login.html";
+            window.location.href = "../../../fe/dashboard/login/login.html";
         }
     } catch (e) {
         console.log(e);
@@ -72,7 +70,7 @@ let totalUsers = [];
 const getAllUsers = async () => {
     try {
         updateLoaderDisplay(true);
-        const res = await fetch("http://localhost:3000/be/getAllUsers.php");
+        const res = await fetch("../../../be/getAllUsers.php");
         if (res.ok && res.status === 200) {
             const allUser = await res.json();
             totalUsers = allUser;

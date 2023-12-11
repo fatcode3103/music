@@ -26,18 +26,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
 });
 
 const redirectAdminAfterLogin = () => {
-    let cookieName = "username";
-    let cookies = document.cookie.split(";");
-    let cookieValue = null;
-    for (let i = 0; i < cookies.length; i++) {
-        let cookie = cookies[i].trim();
-        if (cookie.indexOf(cookieName + "=") === 0) {
-            cookieValue = cookie.substring(
-                (cookieName + "=").length,
-                cookie.length
-            );
-            break;
-        }
+    let cookieValue = "";
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; username=`);
+    if (parts.length === 2) {
+        cookieValue = parts.pop().split(";").shift();
     }
     if (cookieValue !== "admin") {
         window.location.href =

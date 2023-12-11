@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="./css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="./css/user-menu.css">
 
 
     <!-- Favicons -->
@@ -48,8 +49,15 @@
             </div>
 
             <div class="login-form">
-                <a class="login-form-btn" type="submit" href="login.html">Đăng nhập</a>
-            </div>
+                    <a class="login-form-btn" type="submit" href="./login.html">Đăng nhập</a>
+                    <div class="avartar-user" onclick="toggleMenu()">
+                        <img src="./img/artists/artist1.jpg"/>
+                        <div class="avatar-menu">
+                            <a href="#" class="logout-menu-user">Logout</a>
+                            <a href="#" class="profile-menu-user">Profile</a>
+                        </div>
+                    </div>
+                </div>
         </div>
 
         <button class="header__btn" type="button">
@@ -318,5 +326,6 @@
 </footer>
 <!-- end footer -->
 <script src="./js/singers.js"> </script>
+<script src="./js/user-menu.js"> </script>
 </body>
 </html>

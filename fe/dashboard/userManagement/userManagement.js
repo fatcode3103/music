@@ -65,17 +65,20 @@ btnLogoutElement.onclick = async () => {
     }
 };
 
+const itemsPerPage = 5;
+let currentPage = 1;
+let totalUsers = [];
+
 const getAllUsers = async () => {
     try {
         updateLoaderDisplay(true);
         const res = await fetch("http://localhost:3000/be/getAllUsers.php");
         if (res.ok && res.status === 200) {
-            setTimeout(async () => {
-                const allUser = await res.json();
-                console.log(allUser);
-                updateLoaderDisplay(false);
-                displayUsersToTable(allUser);
-            }, 1000);
+            const allUser = await res.json();
+            totalUsers = allUser;
+            updateLoaderDisplay(false);
+            displayUsersToTable(currentPage);
+            updatePageInfo();
         } else {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -84,10 +87,26 @@ const getAllUsers = async () => {
     }
 };
 
-const displayUsersToTable = (users) => {
-    const tableElement = document.getElementsByTagName("table");
+const displayUsersToTable = (page) => {
+    const tableElement = document.getElementsByTagName("table")[0];
+    tableElement.innerHTML = ""; // Clear table content before rendering
 
-    users.forEach((user, index) => {
+    const tableHeader = document.createElement("tr");
+    tableHeader.innerHTML = `
+        <td>STT</td>
+        <td>Tên</td>
+        <td>Tài khoản</td>
+        <td>Mật khẩu</td>
+        <td>Playlist</td>
+        <td>Hành động</td>
+    `;
+    tableElement.appendChild(tableHeader);
+
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const usersToDisplay = totalUsers.slice(startIndex, endIndex);
+
+    usersToDisplay.forEach((user, index) => {
         const row = document.createElement("tr");
         row.setAttribute("data-user-id", user.user_id);
         row.innerHTML = `
@@ -100,8 +119,32 @@ const displayUsersToTable = (users) => {
                 user.user_id
             })" class="fa-regular fa-trash-can"></i></td>
         `;
-        tableElement[0].appendChild(row);
+        tableElement.appendChild(row);
     });
+};
+
+const updatePageInfo = () => {
+    const pageInfo = document.getElementById("pageInfo");
+    pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(
+        totalUsers.length / itemsPerPage
+    )}`;
+};
+
+const prevPage = () => {
+    if (currentPage > 1) {
+        currentPage--;
+        displayUsersToTable(currentPage);
+        updatePageInfo();
+    }
+};
+
+const nextPage = () => {
+    const totalPages = Math.ceil(totalUsers.length / itemsPerPage);
+    if (currentPage < totalPages) {
+        currentPage++;
+        displayUsersToTable(currentPage);
+        updatePageInfo();
+    }
 };
 
 const deleteUserById = async (userId) => {

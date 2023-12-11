@@ -113,18 +113,29 @@ const deleteUserById = async (userId) => {
     });
 
     if (!response.ok || response.status !== 200) {
-        alert(`Error: ${response.status}`);
+        Toastify({
+            text: `Error: ${response.status}`,
+            className: "success",
+            position: "center",
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+        }).showToast();
         throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
-        alert("Deletion successful");
-        // Xóa hàng có user_id tương ứng khỏi DOM
         const deletedRow = document.querySelector(
             `tr[data-user-id="${userId}"]`
         );
         if (deletedRow) {
             deletedRow.remove();
-        } else {
-            console.warn(`Row with user_id ${userId} not found in DOM.`);
         }
+        Toastify({
+            text: "Delete user success",
+            className: "success",
+            position: "center",
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+        }).showToast();
     }
 };

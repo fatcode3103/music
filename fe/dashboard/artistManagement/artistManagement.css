@@ -186,3 +186,16 @@ table tr td:last-child i:hover {
 .wrapper-btn-new-singer {
     text-align: right;
 }
+
+.cus-form {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+#pagination {
+    color: #fff;
+    margin-top: 20px;
+    display: flex !important;
+    gap: 10px;
+    align-items: center;
+}

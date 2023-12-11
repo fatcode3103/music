@@ -72,6 +72,7 @@ const getAllUsers = async () => {
         if (res.ok && res.status === 200) {
             setTimeout(async () => {
                 const allUser = await res.json();
+                console.log(allUser);
                 updateLoaderDisplay(false);
                 displayUsersToTable(allUser);
             }, 1000);
@@ -94,7 +95,7 @@ const displayUsersToTable = (users) => {
             <td>${user.name || "-"}</td>
             <td>${user.username || "-"}</td>
             <td>${user.password || "-"}</td>
-            <td>${user.pl_name || "-"}</td>
+            <td>${user.playlist_count || "-"}</td>
             <td><i onclick="deleteUserById(${
                 user.user_id
             })" class="fa-regular fa-trash-can"></i></td>

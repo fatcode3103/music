@@ -1,3 +1,26 @@
+const btnLogoutElement = document.querySelector(".btn-logout");
+btnLogoutElement.onclick = async () => {
+    try {
+        const params = new URLSearchParams();
+        params.append("logout", true);
+        const url = "../../../be/logout.php?" + params.toString();
+        const response = await fetch(url, {
+            method: "get",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        if (!response.ok || response.status !== 200) {
+            alert("Logout failed !");
+        } else {
+            window.location.href =
+                "http://localhost:3000/fe/dashboard/login/login.html";
+        }
+    } catch (e) {
+        console.log(e);
+    }
+};
+
 document.addEventListener("DOMContentLoaded", function () {
     // Lấy URL hiện tại
     const currentUrl = window.location.href;
@@ -16,21 +39,15 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 const redirectAdminAfterLogin = () => {
-    let cookieName = "username";
-    let cookies = document.cookie.split(";");
-    let cookieValue = null;
-    for (let i = 0; i < cookies.length; i++) {
-        let cookie = cookies[i].trim();
-        if (cookie.indexOf(cookieName + "=") === 0) {
-            cookieValue = cookie.substring(
-                (cookieName + "=").length,
-                cookie.length
-            );
-            break;
-        }
+    let cookieValue = "";
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; username=`);
+    if (parts.length === 2) {
+        cookieValue = parts.pop().split(";").shift();
     }
     if (cookieValue !== "admin") {
-        window.location.href = "./dashboard/login/login.html";
+        window.location.href =
+            "http://localhost:3000/fe/dashboard/login/login.html";
     }
 };
 

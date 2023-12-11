@@ -7,7 +7,10 @@ class User
 
     static public function getAllUsers()
     {
-        $sql = "select * from users";
+        $sql = "SELECT users.user_id, users.username, users.name, users.password, COUNT(playlist.playlist_id) AS playlist_count
+                FROM users
+                LEFT JOIN playlist ON users.user_id = playlist.user_id
+                GROUP BY users.user_id, users.username, users.name, users.password;";
         $users = DB::execute($sql);
         return $users;
     }

@@ -7,7 +7,9 @@ class User
 
     static public function getAllUsers()
     {
-        $sql = "select * from users";
+        $sql = "SELECT users.user_id, users.username, users.name, users.password, playlist.pl_name
+            FROM users
+            JOIN playlist ON users.user_id = playlist.user_id";
         $users = DB::execute($sql);
         return $users;
     }

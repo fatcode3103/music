@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./artistManagement.css" />
+        <link rel="stylesheet" href="../../css/loading.css" />
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -33,13 +34,12 @@
                         src="../../img/avartar-admin.png"
                     />
                     <div class="menu-admin" id="menu-admin">
-                        <a href="#">Menu Item 1</a>
-                        <a href="#">Menu Item 2</a>
-                        <a href="#">Menu Item 3</a>
+                        <p class="btn-logout">Logout</p>
                     </div>
                 </div>
             </div>
             <div class="body">
+                <div class="loader"></div>
                 <div class="navbar">
                     <a
                         class="navbar-item"
@@ -64,43 +64,53 @@
                 <div class="content">
                     <div class="content-wrapper">
                         <div class="content-body">
+                            <div class="wrapper-btn-new-singer">
+                                <button
+                                    type="button"
+                                    class="btn btn-primary mb-4"
+                                >
+                                    Thêm nghệ sĩ
+                                </button>
+                            </div>
                             <table style="width: 100%">
                                 <tr>
                                     <td>STT</td>
-                                    <td>Tên</td>
-                                    <td>Mật khẩu</td>
-                                    <td>Playlist</td>
+                                    <td>Nghệ danh</td>
+                                    <td>Tên thật</td>
+                                    <td>Album đã phát hành</td>
                                     <td>Hành động</td>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Germany</td>
-                                    <td>Germany</td>
-                                    <td>Germany</td>
-                                    <td>
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Francisco Chang</td>
-                                    <td>Mexico</td>
-                                    <td>Mexico</td>
-                                    <td>
-                                        <i class="fa-regular fa-trash-can"></i>
-                                    </td>
-                                </tr>
+                                <script>
+                                    document.addEventListener(
+                                        "DOMContentLoaded",
+                                        async () => {
+                                            try {
+                                                updateLoaderDisplay(true);
+                                                setTimeout(async () => {
+                                                    const singers =
+                                                        await getAllSingers();
+                                                    displaySingersToTable(
+                                                        singers
+                                                    );
+                                                    updateLoaderDisplay(false);
+                                                }, 1000);
+                                            } catch (error) {
+                                                console.error(error);
+                                            }
+                                        }
+                                    );
+                                </script>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="./artistManagement.js"></script>
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"
         ></script>
+        <script src="./artistManagement.js"></script>
     </body>
 </html>

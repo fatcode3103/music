@@ -53,7 +53,7 @@
     justify-content: flex-start !important;
     padding: 40px 20px 20px 20px !important;
     height: 100%;
-    width: 15%;
+    width: 20%;
 }
 
 .navbar-item {
@@ -100,7 +100,7 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
     width: 200px;
-    top: 6%;
+    top: 10%;
     transform: translateX(-70%);
 }
 
@@ -161,4 +161,16 @@ table tr td:last-child i {
 table tr td:last-child i:hover {
     cursor: pointer;
     transform: scale(1.4);
+}
+
+.btn-logout {
+    background-color: #e4e4e4;
+    margin: 0;
+    padding: 10px 14px;
+    color: rgb(224, 46, 46);
+}
+
+.btn-logout:hover {
+    cursor: pointer;
+    opacity: 0.8;
 }

@@ -26,7 +26,7 @@ const redirectUserAfterLogin = () => {
         }
     }
     if (cookieValue !== "user") {
-        window.location.href = "./login.html";
+        window.location.href = "http://localhost:3000/fe/login/login.html";
     }
 };
 

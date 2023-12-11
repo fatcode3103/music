@@ -48,8 +48,7 @@ btnLogoutElement.onclick = async () => {
         if (!response.ok || response.status !== 200) {
             alert("Logout failed !");
         } else {
-            window.location.href =
-                "http://localhost:3000/fe/dashboard/login/login.html";
+            window.location.href = "../../../fe/dashboard/login/login.html";
         }
     } catch (e) {
         console.log(e);
@@ -100,7 +99,7 @@ const getAllSingers = async () => {
 
 const allSingers = async () => {
     try {
-        const res = await fetch("http://localhost:3000/be/getAllSingers.php");
+        const res = await fetch("../../../be/getAllSingers.php");
         if (res.ok && res.status === 200) {
             const allSinger = await res.json();
             return allSinger;
@@ -162,8 +161,7 @@ const redirectAdminAfterLogin = () => {
         cookieValue = parts.pop().split(";").shift();
     }
     if (cookieValue !== "admin") {
-        window.location.href =
-            "http://localhost:3000/fe/dashboard/login/login.html";
+        window.location.href = "../../../fe/dashboard/login/login.html";
     }
 };
 
@@ -210,7 +208,7 @@ const addNewSinger = async (
     };
 
     try {
-        const res = await fetch("http://localhost:3000/be/addNewSinger.php", {
+        const res = await fetch("../../../be/addNewSinger.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -284,7 +282,7 @@ const getSingerById = async (singerId) => {
         myModal.show();
         modalMode = "edit";
         const res = await fetch(
-            `http://localhost:3000/be/getSingerById.php?singerId=${singerId}`
+            `../../../getSingerById.php?singerId=${singerId}`
         );
         if (res.ok && res.status === 200) {
             const result = await res.json();

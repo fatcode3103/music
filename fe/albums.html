@@ -120,7 +120,7 @@
 <!-- end sidebar -->
 
 <!-- content -->
- <div class="content-albums">
+<div class="content-albums">
     <div class="title-albums">
         <h1>Album</h1>
     </div>
@@ -133,34 +133,39 @@
         </div>
     </form> 
     
-    <div class="albums-container" >
-        <div class="album" >
-            <a href="./albumDetail.html">
-                <img src="./img/album/cover1.jpg" alt="Album 1">
-                <span class="name_album">Space Melody</span>
-                <span><a class="name_artist" href="#">VIZE</a></span>
-                <span class="play-icon material-icons">play_circle_outline</span>
-            </a>
-        </div>
-        <div class="album" >
-            <a href="./albumDetail.html">
-                <img src="./img/album/cover2.jpg" alt="Album 2">
-                <span class="name_album">B.S.N.L</span>
-                <span><a class="name_artist" href="#">Bray</a></span>
-                <span class="play-icon material-icons">play_circle_outline</span>
-            </a>
-        </div>
-        <div class="album" >
-            <a href="./albumDetail.html">
-                <img src="./img/album/cover6.jpg" alt="Album 3">
-                <span class="name_album">Prime Day</span>
-                <span><a class="name_artist" href="#">Billie Eilish</a></span>
-                <span class="play-icon material-icons">play_circle_outline</span>
-            </a>
-        </div>
-        
+    <div class="albums-container">
+        <script>
+            const albumResult = document.querySelector(".albums-container");
+
+            async function layDuLieuAlbum() {
+                try {
+                    const phanHoi = await fetch("../be/getAlbum.php");
+                    const albums = await phanHoi.json();
+                    return albums;
+                } catch (loi) {
+                    console.error('Lỗi khi lấy dữ liệu album:', loi);
+                    return [];
+                }
+            }
+
+            (async () => {
+                const albums = await layDuLieuAlbum();
+
+                albums.forEach((item) => {
+                    albumResult.innerHTML += `
+                    <div class="album">
+                        <a href="./albumDetail.html">
+                            <img src="${item.image}" alt="Album 1">
+                            <span class="name_album">${item.rel_name}</span>
+                            <span class="play-icon material-icons">play_circle_outline</span>
+                        </a>
+                    </div>`;
+                });
+            })();
+        </script>
     </div>
-</div>
+</div>                                
+
 <!-- end content -->
 
 <!-- footer -->

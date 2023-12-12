@@ -176,84 +176,73 @@
         <div class="title-album">
             <h1>Album nhạc</h1>
         </div>
-
         <div class="album-container">
-            <div class="album">
-                <a href="#" class="album">
-                    <img src="./img/album/cover1.jpg" alt="Album 1">
-                    <span>Album 1</span>
-                </a>
-            </div>
-            <div class="album">
-                <a href="#" class="album">
-                    <img src="./img/album/cover3.jpg" alt="Album 3">
-                    <span>Album 3</span>
-                </a>
-            </div>
-            <div class="album">
-                <a href="#" class="album">
-                    <img src="./img/album/cover4.jpg" alt="Album 4">
-                    <span>Album 4</span>
-                </a>
-            </div>
-            <div class="album">
-                <a href="#" class="album">
-                    <img src="./img/album/cover5.jpg" alt="Album 5">
-                    <span>Album 5</span>
-                </a>
-            </div>
-            <div class="album">
-                <a href="#" class="album">
-                    <img src="./img/album/cover6.jpg" alt="Album 6">
-                    <span>Album 6</span>
-                </a>
-            </div>
-            <div class="album">
-                <a href="#" class="album">
-                    <img src="./img/album/cover7.jpg" alt="Album 7">
-                    <span>Album 7</span>
-                </a>
-            </div>
+            <script>
+                const albumResult = document.querySelector(".album-container");
+
+                async function layDuLieuAlbum() {
+                    try {
+                        const phanHoi = await fetch("../be/getAlbum.php");
+                        const albums = await phanHoi.json();
+                        return albums;
+                    } catch (loi) {
+                        console.error('Lỗi khi lấy dữ liệu album:', loi);
+                        return [];
+                    }
+                }
+
+                (async () => {
+                    const albums = await layDuLieuAlbum();
+
+                    albums.forEach((item) => {
+                        albumResult.innerHTML += `
+                        <div class="album">
+                            <a href="./album.html" class="album">
+                                <img src="${item.image}" alt="Album 1">
+                                <span>
+                                    ${item.rel_name}
+                                </span>
+                            </a>
+                        </div>`;
+                    });
+                })();
+            </script>
         </div>
-
     </div>
-
-    <!-- content singers -->
+    <!-- Nghệ sĩ -->
     <div class="content-singers">
         <div class="title-singers">
             <h1>Nghệ sĩ</h1>
         </div>
         <div class="artists-container">
-            <div class="artist">
-                <a href="./singers.html" class="artist">
-                    <img src="./img/artists/artist1.jpg" alt="Artist 1">
-                    <span>Artist 1</span>
-                </a>
-            </div>
-            <div class="artist">
-                <a href="./singers.html" class="artist">
-                    <img src="./img/artists/artist2.jpg" alt="Artist 2">
-                    <span>Artist 2</span>
-                </a>
-            </div>
-            <div class="artist">
-                <a href="./singers.html" class="artist">
-                    <img src="./img/artists/artist3.jpg" alt="Artist 2">
-                    <span>Artist 3</span>
-                </a>
-            </div>
-            <div class="artist">
-                <a href="./singers.html" class="artist">
-                    <img src="./img/artists/artist4.jpg" alt="Artist 2">
-                    <span>Artist 4</span>
-                </a>
-            </div>
-            <div class="artist">
-                <a href="./singers.html" class="artist">
-                    <img src="./img/artists/artist5.jpg" alt="Artist 2">
-                    <span>Artist 5</span>
-                </a>
-            </div>
+            <script>
+                let singerResult = document.querySelector(".artists-container");
+
+                async function layDuLieuNgheSi() {
+                    try {
+                        const phanHoi = await fetch("../be/getSinger.php");
+                        const singers = await phanHoi.json();
+                        return singers;
+                    } catch (loi) {
+                        console.error('Lỗi khi lấy dữ liệu nghệ sĩ:', loi);
+                        return [];
+                    }
+                }
+
+                (async () => {
+                    const singers = await layDuLieuNgheSi();
+
+                    singers.forEach((item) => {
+                        singerResult.innerHTML += `
+                        <div class="artist">
+                            <a href="./singers.html" class="artist">
+                                <img src="${item.image}" alt="Nghệ sĩ 1">
+                                <span>${item.stage_name}</span>
+                            </a>
+                        </div>`;
+                    });
+                })();
+            </script>
         </div>
     </div>
 

@@ -94,7 +94,7 @@ const displayUsersToTable = (users) => {
             <td>${index + 1}</td>
             <td>${user.name || "-"}</td>
             <td>${user.username || "-"}</td>
-            <td>${user.password || "-"}</td>
+            <td>${"*****"}</td>
             <td>${user.playlist_count || "-"}</td>
             <td><i onclick="deleteUserById(${
                 user.user_id

@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 const getAllAlbum = async () => {
     try { 
-        const res = await fetch("http://localhost:3000/be/album.php");
+        const res = await fetch("http://localhost:3000/be/getAllAlbum.php");
         if (res.ok && res.status === 200) {
             const allAlbums = await res.json();
             console.log("allAlbum:>>> ", allAlbums);
@@ -70,10 +70,12 @@ const displayAlbumToTable = async (albums) => {
             <td>${item.stage_name || "-"}</td>            
             <td>${item.numberOfTracks || "-"}</td>
             <td>
-                <i
+                <i data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                     class="fa-regular fa-pen-to-square btn-edit"
                 ></i>
-                <i class="fa-regular fa-trash-can"></i>
+                <i onclick="deleteAlbumById(${
+                    item.release_id
+                })"class="fa-regular fa-trash-can"></i>
             </td>
         `;
         tableElement[0].appendChild(row);
@@ -98,3 +100,27 @@ function toggleMenu() {
     menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 
+const deleteAlbumById = async (albumId) => {
+    var formData = new FormData();
+    formData.append("release_id", albumId);
+    const response = await fetch("../../../be/deleteAlbumById.php", {
+        method: "POST",
+        body: formData,
+    });
+
+    if (!response.ok || response.status !== 200) {
+        alert(`Error: ${response.status}`);
+        throw new Error(`HTTP error! Status: ${response.status}`);
+    } else {
+        alert("Deletion successful");
+        // Xóa hàng có release_id tương ứng khỏi DOM
+        const deletedRow = document.querySelector(
+            `tr[data-item-id="${albumId}"]`
+        );
+        if (deletedRow) {
+            deletedRow.remove();
+        } else {
+            console.warn(`Row with user_id ${albumId} not found in DOM.`);
+        }
+    }
+};

@@ -15,7 +15,7 @@ class Release
                     COUNT(tracks.track_id) AS numberOfTracks
                 FROM
                     releases
-                JOIN
+                LEFT JOIN
                     tracks ON releases.release_id = tracks.release_id
                 JOIN
                     singers ON releases.singer_id = singers.singer_id
@@ -35,8 +35,11 @@ class Release
         $insert = DB::execute($sql);
         return $insert;
     }
-
-    public function deleteAlbum($Album)
+    function deleteAlbumById($albumId)
     {
+        $sql = "delete from releases where release_id = ?;";
+        $data = array($albumId);
+        $res = DB::execute($sql, $data);
+        return $res;
     }
 }

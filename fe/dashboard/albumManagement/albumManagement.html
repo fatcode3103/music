@@ -54,7 +54,7 @@
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
-                                    <form action="../../../be/add.php" method="post">
+                                    <form action="../../../be/addAlbum.php" method="post">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title" id="staticBackdropLabel">Album mới</h4>
@@ -75,7 +75,7 @@
                                                 <div class="mb-3 name-album">
                                                     <label for="exampleFormControlInput1" class="form-label">Nghệ sĩ</label>                                                   
                                                   <select name="singer_id" class="singer">
-                                                    
+                                                    <!-- Đổ dữ liệu ra thẻ select -->
                                                     <script>
                                                         const result = document.querySelector(".singer");
                                                     
@@ -112,7 +112,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Đóng</button>
-                                            <button type="submit" class="btn btn-primary">Thêm</button>
+                                            <button type="submit" class="btn btn-primary" name="submit">Thêm</button>
                                         </div>
                                     </div>
                                     </form>

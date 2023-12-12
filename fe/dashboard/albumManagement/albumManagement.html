@@ -49,7 +49,7 @@
                                 Thêm mới
                             </button>
 
-                            <!-- Modal -->
+                            <!-- Modal Add Album -->
                             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                 aria-hidden="true">
@@ -120,6 +120,71 @@
                             </div>
 
                         </div>
+  <!-- Modal Edit Album-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="../../../be/editAlbum.php" method="post" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Cập nhật Album</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body 1">
+            <div class="card-body">
+                <input type="text" id="release_id"> 
+                <div class="mb-2 name-album">
+                    <label for="exampleFormControlInput1" class="form-label">Tên Album</label>                                            
+                    <input type="text" class="form-control" name = "rel_name" placeholder="Nhập tên Album" id="ten">                                                       
+                </div>
+                <div class="mb-3 name-album">
+                    <label for="exampleFormControlInput1" class="form-label">Hình ảnh</label>                                            
+                    <input type="text" class="form-control" name ="image" placeholder="Link hình ảnh" id="anh">                                                       
+                </div>
+                <div class="mb-3 name-album">
+                    <label for="exampleFormControlInput1" class="form-label">Nghệ sĩ</label>                                                   
+                  <select name="singer_id" class="singer1" id="casi">
+                    <!-- Đổ dữ liệu ra thẻ select -->
+                    <script>
+                        const result1 = document.querySelector(".singer1");
+                    
+                        async function getData() {
+                            try {
+                                const response = await fetch("/be/getID.php");
+                                const singer = await response.json();
+                                return singer;
+                            } catch (error) {
+                                console.error('Lỗi khi lấy dữ liệu:', error);
+                                return [];
+                            }
+                        }
+                    
+                        (async () => {
+                            const singer = await getData();
+                    
+                            singer.forEach((item) => {
+                                result1.innerHTML += `
+                                <option value="${item.singer_id}">${item.stage_name}</option>
+                                    `;
+                            });
+                        })();
+                        
+                    </script>
+                    </select>
+                </div>
+                <div class="mb-2 name-album">
+                    <label for="exampleFormControlInput1" class="form-label">Nội dung Album</label>  
+                    <textarea class="form-control" name ="about" placeholder="Nhập nội dung" name="" cols="20" rows="5" id="noidung"></textarea>                                                       
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+          <button type="submit" class="btn btn-primary" name="submit1">Lưu thay đổi</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
                         <table style="width: 100%">
                             <tr>
                                 <td>STT</td>

@@ -25,7 +25,13 @@ class Release
         $album = DB::execute($sql);
         return $album;
     }
-
+    static public function getAlbum()
+    {
+        $sql = "SELECT * FROM releases";
+        $album = DB::execute($sql);
+        return $album;
+    }
+    
     public function addAlbum($newAlbum)
     {
 
@@ -41,5 +47,14 @@ class Release
         $data = array($albumId);
         $res = DB::execute($sql, $data);
         return $res;
+    }
+
+    function editAlbumById($data)
+    {  
+        $sql = "UPDATE `releases` 
+                SET `rel_name` = ?, `about` = ?, `image` = ?, `singer_id` = ?
+                where release_id = ?;";        
+        $rep = DB::execute($sql, $data);
+        return $rep;
     }
 }

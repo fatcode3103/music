@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="./css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="./css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="./css/user-menu.css">
+
 
     <!-- Favicons -->
 	<link rel="icon" type="image/png" href="./img/favicon-32x32.png" sizes="32x32">
@@ -46,10 +48,17 @@
                     </svg></button>
             </div>
             <form action="" method="post">
-
                 <div class="login-form">
-                    <a class="login-form-btn" type="submit" href="login.html">Đăng nhập</a>
+                    <a class="login-form-btn" type="submit" href="./login.html">Đăng nhập</a>
+                    <div class="avartar-user" onclick="toggleMenu()">
+                        <img src="./img/artists/artist1.jpg"/>
+                        <div class="avatar-menu">
+                            <a href="#" class="logout-menu-user">Logout</a>
+                            <a href="#" class="profile-menu-user">Profile</a>
+                        </div>
+                    </div>
                 </div>
+                
             </form>
         </div>
 
@@ -414,5 +423,7 @@
 
 <!-- <script src="./js/albums.js"> </script> -->
 <script src="./js/home.js"></script>
+<script src="./js/user-menu.js"> </script>
+
 </body>
 </html>

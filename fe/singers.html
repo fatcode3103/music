@@ -133,36 +133,34 @@
     </form> 
     
     <div class="artists-container">
-        <div class="artist" >
-            <a href="#" class="artist">
-                <img src="./img/artists/artist1.jpg" alt="Artist 1">
-                <span>Artist 1</span>
-            </a>
-        </div>
-        <div class="artist" >
-            <a href="#" class="artist">
-                <img src="./img/artists/artist2.jpg" alt="Artist 2">
-                <span>Artist 2</span>
-            </a>
-        </div>
-        <div class="artist" >
-            <a href="#" class="artist">
-                <img src="./img/artists/artist3.jpg" alt="Artist 2">
-                <span>Artist 3</span>
-            </a>
-        </div>
-        <div class="artist" >
-            <a href="#" class="artist">
-                <img src="./img/artists/artist4.jpg" alt="Artist 2">
-                <span>Artist 4</span>
-            </a>
-        </div>
-        <div class="artist" >
-            <a href="#" class="artist">
-                <img src="./img/artists/artist5.jpg" alt="Artist 2">
-                <span>Artist 5</span>
-            </a>
-        </div>
+        <script>
+            let singerResult = document.querySelector(".artists-container");
+
+            async function layDuLieuNgheSi() {
+                try {
+                    const phanHoi = await fetch("../be/getSinger.php");
+                    const singers = await phanHoi.json();
+                    return singers;
+                } catch (loi) {
+                    console.error('Lỗi khi lấy dữ liệu nghệ sĩ:', loi);
+                    return [];
+                }
+            }
+
+            (async () => {
+                const singers = await layDuLieuNgheSi();
+
+                singers.forEach((item) => {
+                    singerResult.innerHTML += `
+                    <div class="artist">
+                        <a href="singers-detail.html" class="artist">
+                            <img src="${item.image}" alt="Nghệ sĩ 1">
+                            <span>${item.stage_name}</span>
+                        </a>
+                    </div>`;
+                });
+            })();
+        </script>      
     </div>
 </div>
 

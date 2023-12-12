@@ -178,3 +178,18 @@ table tr td:last-child i:hover {
     cursor: pointer;
     opacity: 0.8;
 }
+
+.btn-edit {
+    color: rgb(35, 133, 224) !important;
+}
+
+.wrapper-btn-new-singer {
+    text-align: right;
+}
+/*  */
+.name-album{
+    text-align: left;
+}
+.form-label{
+    left: 10px;
+}

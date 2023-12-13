@@ -33,8 +33,7 @@ const redirectAdminAfterLogin = () => {
         cookieValue = parts.pop().split(";").shift();
     }
     if (cookieValue !== "admin") {
-        window.location.href =
-            "http://localhost:3000/fe/dashboard/login/login.html";
+        window.location.href = "../../../fe/dashboard/login/login.html";
     }
 };
 
@@ -57,25 +56,27 @@ btnLogoutElement.onclick = async () => {
         if (!response.ok || response.status !== 200) {
             alert("Logout failed !");
         } else {
-            window.location.href =
-                "http://localhost:3000/fe/dashboard/login/login.html";
+            window.location.href = "../../../fe/dashboard/login/login.html";
         }
     } catch (e) {
         console.log(e);
     }
 };
 
+const itemsPerPage = 5;
+let currentPage = 1;
+let totalUsers = [];
+
 const getAllUsers = async () => {
     try {
         updateLoaderDisplay(true);
-        const res = await fetch("http://localhost:3000/be/getAllUsers.php");
+        const res = await fetch("../../../be/getAllUsers.php");
         if (res.ok && res.status === 200) {
-            setTimeout(async () => {
-                const allUser = await res.json();
-                console.log(allUser);
-                updateLoaderDisplay(false);
-                displayUsersToTable(allUser);
-            }, 1000);
+            const allUser = await res.json();
+            totalUsers = allUser;
+            updateLoaderDisplay(false);
+            displayUsersToTable(currentPage);
+            updatePageInfo();
         } else {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -84,10 +85,26 @@ const getAllUsers = async () => {
     }
 };
 
-const displayUsersToTable = (users) => {
-    const tableElement = document.getElementsByTagName("table");
+const displayUsersToTable = (page) => {
+    const tableElement = document.getElementsByTagName("table")[0];
+    tableElement.innerHTML = ""; // Clear table content before rendering
 
-    users.forEach((user, index) => {
+    const tableHeader = document.createElement("tr");
+    tableHeader.innerHTML = `
+        <td>STT</td>
+        <td>Tên</td>
+        <td>Tài khoản</td>
+        <td>Mật khẩu</td>
+        <td>Playlist</td>
+        <td>Hành động</td>
+    `;
+    tableElement.appendChild(tableHeader);
+
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const usersToDisplay = totalUsers.slice(startIndex, endIndex);
+
+    usersToDisplay.forEach((user, index) => {
         const row = document.createElement("tr");
         row.setAttribute("data-user-id", user.user_id);
         row.innerHTML = `
@@ -100,8 +117,32 @@ const displayUsersToTable = (users) => {
                 user.user_id
             })" class="fa-regular fa-trash-can"></i></td>
         `;
-        tableElement[0].appendChild(row);
+        tableElement.appendChild(row);
     });
+};
+
+const updatePageInfo = () => {
+    const pageInfo = document.getElementById("pageInfo");
+    pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(
+        totalUsers.length / itemsPerPage
+    )}`;
+};
+
+const prevPage = () => {
+    if (currentPage > 1) {
+        currentPage--;
+        displayUsersToTable(currentPage);
+        updatePageInfo();
+    }
+};
+
+const nextPage = () => {
+    const totalPages = Math.ceil(totalUsers.length / itemsPerPage);
+    if (currentPage < totalPages) {
+        currentPage++;
+        displayUsersToTable(currentPage);
+        updatePageInfo();
+    }
 };
 
 const deleteUserById = async (userId) => {
@@ -113,18 +154,29 @@ const deleteUserById = async (userId) => {
     });
 
     if (!response.ok || response.status !== 200) {
-        alert(`Error: ${response.status}`);
+        Toastify({
+            text: `Error: ${response.status}`,
+            className: "success",
+            position: "center",
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+        }).showToast();
         throw new Error(`HTTP error! Status: ${response.status}`);
     } else {
-        alert("Deletion successful");
-        // Xóa hàng có user_id tương ứng khỏi DOM
         const deletedRow = document.querySelector(
             `tr[data-user-id="${userId}"]`
         );
         if (deletedRow) {
             deletedRow.remove();
-        } else {
-            console.warn(`Row with user_id ${userId} not found in DOM.`);
         }
+        Toastify({
+            text: "Delete user success",
+            className: "success",
+            position: "center",
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+        }).showToast();
     }
 };

@@ -19,8 +19,7 @@ btnLogoutElement.onclick = async () => {
         if (!response.ok || response.status !== 200) {
             alert("Logout failed !");
         } else {
-            window.location.href =
-                "http://localhost:3000/fe/dashboard/login/login.html";
+            window.location.href = "../../../fe/dashboard/login/login.html";
         }
     } catch (e) {
         console.log(e);
@@ -91,8 +90,7 @@ const redirectAdminAfterLogin = () => {
         cookieValue = parts.pop().split(";").shift();
     }
     if (cookieValue !== "admin") {
-        window.location.href =
-            "http://localhost:3000/fe/dashboard/login/login.html";
+        window.location.href = "../../../fe/dashboard/login/login.html";
     }
 };
 

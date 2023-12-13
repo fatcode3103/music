@@ -18,6 +18,11 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
         />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+        />
         <title>Admin</title>
     </head>
     <body>
@@ -65,14 +70,129 @@
                     <div class="content-wrapper">
                         <div class="content-body">
                             <div class="wrapper-btn-new-singer">
+                                <!-- Button trigger modal -->
                                 <button
                                     type="button"
                                     class="btn btn-primary mb-4"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"
                                 >
                                     Thêm nghệ sĩ
                                 </button>
+
+                                <!-- Modal -->
+                                <div
+                                    class="modal fade"
+                                    id="exampleModal"
+                                    tabindex="-1"
+                                    aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true"
+                                >
+                                    <div
+                                        class="modal-dialog modal-dialog-centered modal-xl"
+                                    >
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5
+                                                    class="modal-title"
+                                                    id="exampleModalLabel"
+                                                >
+                                                    Thêm nghệ sĩ mới
+                                                </h5>
+                                                <button
+                                                    type="button"
+                                                    class="btn-close"
+                                                    data-bs-dismiss="modal"
+                                                    aria-label="Close"
+                                                ></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-4 cus-form">
+                                                        <label
+                                                            class="form-label"
+                                                            >Tên nghệ
+                                                            danh</label
+                                                        >
+                                                        <input
+                                                            class="form-control"
+                                                            type="text"
+                                                            placeholder="Nhập tên nghệ danh"
+                                                        />
+                                                    </div>
+                                                    <div class="col-4 cus-form">
+                                                        <label
+                                                            class="form-label"
+                                                            >Tên thật</label
+                                                        >
+                                                        <input
+                                                            class="form-control"
+                                                            type="text"
+                                                            placeholder="Nhập tên nghệ sĩ"
+                                                        />
+                                                    </div>
+                                                    <div class="col-4 cus-form">
+                                                        <label
+                                                            class="form-label"
+                                                            >Link ảnh</label
+                                                        >
+                                                        <input
+                                                            class="form-control"
+                                                            type="text"
+                                                            placeholder="Chèn link ảnh"
+                                                        />
+                                                    </div>
+                                                    <div
+                                                        class="col-12 cus-form"
+                                                    >
+                                                        <label
+                                                            class="form-label"
+                                                            >Giới thiệu chung về
+                                                            nghệ sĩ</label
+                                                        >
+                                                        <input
+                                                            class="form-control"
+                                                            type="text"
+                                                            placeholder="Giới thiệu sơ bộ"
+                                                        />
+                                                    </div>
+                                                    <div
+                                                        class="col-12 cus-form"
+                                                    >
+                                                        <label
+                                                            class="form-label"
+                                                            >Tiểu sử nghệ
+                                                            sĩ</label
+                                                        >
+                                                        <textarea
+                                                            class="form-control"
+                                                            type="text"
+                                                        ></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-secondary btn-add-new"
+                                                    data-bs-dismiss="modal"
+                                                >
+                                                    Đóng
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    data-bs-dismiss="modal"
+                                                    class="btn btn-primary"
+                                                    onclick="addNewSingerHandler()"
+                                                >
+                                                    Lưu
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <table style="width: 100%">
+                            <table style="width: 100%" id="table">
                                 <tr>
                                     <td>STT</td>
                                     <td>Nghệ danh</td>
@@ -80,27 +200,24 @@
                                     <td>Album đã phát hành</td>
                                     <td>Hành động</td>
                                 </tr>
-                                <script>
-                                    document.addEventListener(
-                                        "DOMContentLoaded",
-                                        async () => {
-                                            try {
-                                                updateLoaderDisplay(true);
-                                                setTimeout(async () => {
-                                                    const singers =
-                                                        await getAllSingers();
-                                                    displaySingersToTable(
-                                                        singers
-                                                    );
-                                                    updateLoaderDisplay(false);
-                                                }, 1000);
-                                            } catch (error) {
-                                                console.error(error);
-                                            }
-                                        }
-                                    );
-                                </script>
                             </table>
+                            <div id="pagination" style="display: block">
+                                <button
+                                    type="button"
+                                    class="btn btn-primary"
+                                    onclick="prevPage()"
+                                >
+                                    Previous
+                                </button>
+                                <span id="pageInfo"></span>
+                                <button
+                                    type="button"
+                                    class="btn btn-primary"
+                                    onclick="nextPage()"
+                                >
+                                    Next
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -112,5 +229,9 @@
             crossorigin="anonymous"
         ></script>
         <script src="./artistManagement.js"></script>
+        <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/toastify-js"
+        ></script>
     </body>
 </html>

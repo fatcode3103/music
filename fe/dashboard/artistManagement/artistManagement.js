@@ -7,6 +7,7 @@ const addSingerBtn = document.querySelector(
 let totalPages = 0;
 let currentPage = 1;
 let recordsPerPage = 5;
+let idEditSingerCurr;
 let modalMode = "add"; // Default mode is "add"
 
 const prevPage = () => {
@@ -170,7 +171,7 @@ function toggleMenu() {
     menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 
-function addNewSingerHandler() {
+async function addNewSingerHandler() {
     const stageName = document.querySelector(
         "#exampleModal input[placeholder='Nhập tên nghệ danh']"
     ).value;
@@ -186,9 +187,22 @@ function addNewSingerHandler() {
     const biography = document.querySelector("#exampleModal textarea").value;
 
     if (modalMode === "add") {
-        addNewSinger(stageName, realName, imageUrl, introduction, biography);
+        await addNewSinger(
+            stageName,
+            realName,
+            imageUrl,
+            introduction,
+            biography
+        );
     } else if (modalMode === "edit") {
-        editSingerById(stageName, realName, imageUrl, introduction, biography);
+        console.log("idEditSingerCurr", idEditSingerCurr);
+        await editSingerById(
+            stageName,
+            realName,
+            imageUrl,
+            introduction,
+            biography
+        );
     }
 }
 
@@ -281,22 +295,69 @@ const getSingerById = async (singerId) => {
         );
         myModal.show();
         modalMode = "edit";
+        idEditSingerCurr = singerId;
         const res = await fetch(
-            `../../../getSingerById.php?singerId=${singerId}`
+            `../../../../be/getSingerById.php?singerId=${singerId}`
         );
         if (res.ok && res.status === 200) {
             const result = await res.json();
             fillModalForEdit(result[0]);
             console.log(result[0]);
         } else {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            throw new Error(`HTTP error! Status: ${res.status}`);
         }
     } catch (e) {
         console.log(e);
     }
 };
 
-const editSingerById = () => {};
+const editSingerById = async (
+    stageName,
+    realName,
+    imageUrl,
+    introduction,
+    biography
+) => {
+    const data = {
+        stageName: stageName,
+        realName: realName,
+        imageUrl: imageUrl,
+        introduction: introduction,
+        biography: biography,
+        singer_id: idEditSingerCurr,
+    };
+    try {
+        const res = await fetch("../../../be/editSingerById.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+        if (res.ok && res.status === 200) {
+            await updateTable();
+            Toastify({
+                text: "Update singer success",
+                className: "success",
+                position: "center",
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                },
+            }).showToast();
+        } else {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+    } catch (e) {
+        Toastify({
+            text: e,
+            className: "success",
+            position: "center",
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+        }).showToast();
+    }
+};
 
 const fillModalForEdit = (singerDetails) => {
     document.querySelector(

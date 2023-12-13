@@ -48,4 +48,33 @@ class Artist
         $res = DB::execute($sql, $data);
         return $res;
     }
+    function editSingerById($dataInput)
+    {
+        $stageName = $dataInput["stageName"];
+        $realName = $dataInput["realName"];
+        $imageUrl = $dataInput["imageUrl"];
+        $introduction = $dataInput["introduction"];
+        $biography = $dataInput["biography"];
+        $singer_id = $dataInput["singer_id"];
+
+        $sql = "UPDATE singers
+                SET
+                    stage_name = ?,
+                    si_name = ?,
+                    image = ?,
+                    subtitle = ?,
+                    about = ?
+                WHERE
+                    singer_id = ?;";
+        $data = array(
+            $stageName,
+            $realName,
+            $imageUrl,
+            $introduction,
+            $biography,
+            $singer_id,
+        );
+        $res = DB::execute($sql, $data);
+        return $res;
+    }
 }

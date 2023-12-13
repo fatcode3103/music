@@ -127,10 +127,9 @@
                         class="player__artist">AudioPizza</span></span>
                 <div class="audio">
                     <audio id="audio" controls preload="none" data-track-id="">
-
                         <source
-                            src="http://blast.volkovdesign.com/audio/12071151_epic-cinematic-trailer_by_audiopizza_preview.mp3"
-                            type="audio/mp3">
+                            src=""
+                            type="audio">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
@@ -274,7 +273,7 @@
 
                     <script>
                         const songList = document.getElementById("songList");
-
+                    
                         async function fetchSongs() {
                             try {
                                 const response = await fetch("../be/getSong.php"); // Cập nhật đường dẫn
@@ -285,13 +284,16 @@
                                 return [];
                             }
                         }
-
-                        (async () => {
+                    
+                        async function displaySongs() {
                             const songs = await fetchSongs();
-
+                    
                             songs.forEach((song) => {
-                                songList.innerHTML += `
-                                <li class="single-item" onclick="listen(this)">
+                                const listItem = document.createElement('li');
+                                listItem.className = 'single-item';
+                                listItem.onclick = () => listen(song);
+                    
+                                listItem.innerHTML = `
                                     <a class="single-item__cover">
                                         <img src="${song.image}" alt="Ảnh Album">                                       
                                     </a>
@@ -300,24 +302,36 @@
                                         <span><a href="artist.html">${song.stage_name}</a></span>
                                     </div>
                                     <span class="single-item__time">${song.listen}</span>
-                                    <a data-playlist data-title="${song.trackname}" data-artist="${song.stage_name}"
-                                        data-img="${song.image}" href="${song.source}">
-                                    </a>
-                                </li>`;
+                                `;
+                    
+                                const audioLink = document.createElement('a');
+                                audioLink.setAttribute('data-playlist', '');
+                                audioLink.setAttribute('data-title', song.trackname);
+                                audioLink.setAttribute('data-artist', song.stage_name);
+                                audioLink.setAttribute('data-img', song.image);
+                                audioLink.setAttribute('href', song.source);
+                                listItem.appendChild(audioLink);
+                    
+                                songList.appendChild(listItem);
                             });
-                        })();
+                        }
+                    
+                        displaySongs();
                     </script>
                 </div>
 
                 <script>
-                    function listen(element) {
-                        document.querySelector('#audio').pause()
-                        document.querySelector('#audio').currentTime = 0
-                        document.querySelector('.player__content span b').textContent = element.querySelector('span').textContent + ". " + element.querySelector('h4').textContent
-                        document.querySelector('.player__content span span').textContent = element.querySelector('.single-item__title span').textContent
-                        document.querySelector('.player__cover img').src = element.querySelector('img').src
-                        document.querySelector('.player__content').parentNode.classList.remove('d-none')
-                        document.querySelector('#audio').play()
+                    const audioElement = document.getElementById("audio");
+                
+                    function listen(song) {
+                        audioElement.pause();
+                        audioElement.currentTime = 0;
+                        document.querySelector('.player__content span b').textContent = `${song.stage_name}. ${song.trackname}`;
+                        document.querySelector('.player__content span span').textContent = song.stage_name;
+                        document.querySelector('.player__cover img').src = song.image;
+                        document.querySelector('.player__content').parentNode.classList.remove('d-none');
+                        audioElement.src = song.source;
+                        audioElement.play();
                     }
                 </script>
         </section>

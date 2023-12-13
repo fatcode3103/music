@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./css/search.css">
+    <link rel="stylesheet" href="/fe/css/search.css">
     <link rel="stylesheet" href="/fe/css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="/fe/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="/fe/css/user-menu.css">
 </head>
 <body>
     <!-- header -->
@@ -29,7 +30,6 @@
                         d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
                 </svg></button>
         </form>
-
         <div class="header__actions">
             <div class="header__action header__action--search">
                 <button class="header__action-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg"
@@ -38,36 +38,19 @@
                             d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z" />
                     </svg></button>
             </div>
+            <form action="" method="post">
 
-
-            
-            <div class="login-form">
-                <a
-                    class="login-form-btn"
-                    type="submit"
-                    href="./login.html"
-                    >Đăng nhập</a
-                >
-                <!-- <div class="avartar-user" onclick="toggleMenu()">
-                    <img src="./img/artists/artist1.jpg" />
-                    <div class="avatar-menu">
-                        <a href="#" class="logout-menu-user">Logout</a>
-                        <a href="#" class="profile-menu-user"
-                            >Profile</a
-                        >
+                <div class="login-form">
+                    <a class="login-form-btn" type="submit" href="./login.html">Đăng nhập</a>
+                    <div class="avartar-user" onclick="toggleMenu()">
+                        <img src="./img/artists/artist1.jpg"/>
+                        <div class="avatar-menu">
+                            <a href="#" class="logout-menu-user">Logout</a>
+                            <a href="#" class="profile-menu-user">Profile</a>
+                        </div>
                     </div>
-                </div> -->
-            </div>
-
-                <a class="header__action-btn d-none status_account" href="profile.html">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em"
-                        viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                        <path
-                            d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
-                    </svg>
-                    <span class="mx-2">Ngọc Khánh</span>
-                </a>
-            </div>
+                </div>
+            </form>
         </div>
 
         <button class="header__btn" type="button">
@@ -395,5 +378,9 @@
     </div>
 </footer>
 <!-- end footer -->
+<!-- <script src="./js/albums.js"> </script> -->
+<script src="/fe/js/home.js"></script>
+<script src="/fe/js/albums.js"> </script>
+
 </body>
 </html>

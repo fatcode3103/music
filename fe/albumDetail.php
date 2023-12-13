@@ -1,3 +1,14 @@
+<?php
+include_once "../be/classes/release.php";
+
+$AlbumDT = new Release();
+$Id = $_GET['albumID'];
+
+$detail = $AlbumDT->getAlbum($Id);
+
+// echo $detail[0]["image"];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -139,20 +150,20 @@
 <!-- content -->
 <div class="content-album-detail">
     <div class="title-name-album">
-        <h1>Space Melody</h1>
+        <h1><?php echo $detail[0]["rel_name"];?></h1>
     </div>
-     
+    <!-- ./img/album/cover1.jpg -->
     <div class="album-content">
         <div class="album-img">
-            <img src="./img/album/cover1.jpg" alt="Album Image" class="album-image">
+            <img src="<?php echo $detail[0]["image"];?>" alt="Album Image" class="album-image">
             <div class="count-songs-album">
                 <div class="music-note-icon">
                     <i class="material-icons">music_note</i>
-                    <span class="count">10 bài</span>
+                    <span class="count">???track.coutnt</span>
                 </div>
                 <div class="head-phone-icon">
                     <i class="material-icons">headset</i>
-                    <span class="count">10 lượt nghe</span>
+                    <span class="count">???track.listen</span>
                 </div>
             </div>
         </div>
@@ -185,48 +196,11 @@
     
     <div class="additional-details">
         <div class="info-more">
-            <h3>Thông tin thêm</h3>
-            <p>Cô đơn trên sofa, con tim như tan ra
-                Dẫn lối em trôi theo một khúc ca buồn
-                Giữa căn phòng, ánh đèn chợt tắt, che đi giọt buồn sắp rơi
-                Cô đơn trên sofa, sao anh yêu cô ta?
-                Chẳng phải anh yêu em hơn cả anh mà?
-                Để cho thanh xuân này chợt tắt, trên mi giọt nước mắt rơi
-                Thì ra là thế, tình nào là tình chẳng mờ phai tháng năm
-                Một ngày vẫn trôi đôi môi em phai màu nắng
-                Nếu không em thì anh có buồn?
-                Hóa ra chỉ mình em đáng thương
-                Đừng buông lời hứa rồi lại vờ rằng dường như anh đã quên
-                Đừng tìm đến em gieo tương tư xong lại đi
-                Nắng xuyên qua hàng mi rối bời
-                Giữ tim em vài giây cuối thôi
-                Để em được ngã lưng lên một chiếc sofa
-                Để nghe một phút tim yên bình đến kỳ lạ
-            </p>
-        </div>
-        <div class="other-album">
-            <h3>Album Nhạc Khác</h3>
-            
-            <div class="albums-container" >
-                <div class="album" >
-                    <a href="./albumDetail.html">
-                        <img src="./img/album/cover1.jpg" alt="Album 1">
-                        <span class="name_album">Space Melody</span>
-                        <span><a class="name_artist" href="#">VIZE</a></span>
-                        <span class="play-icon-song material-icons">play_circle_outline</span>
-                    </a>
-                </div>
-                <div class="album" >
-                    <a href="./albumDetail.html">
-                        <img src="./img/album/cover2.jpg" alt="Album 2">
-                        <span class="name_album">B.S.N.L</span>
-                        <span><a class="name_artist" href="#">Bray</a></span>
-                        <span class="play-icon-song material-icons">play_circle_outline</span>
-                    </a>
-                </div>
-            </div>
+            <h3>Thông tin </h3>
+            <p><?php echo $detail[0]["about"];?></p>
         </div>
     </div>
+    
     <script>
         function listen(element) {
             document.querySelector('#audio').pause()
@@ -260,6 +234,44 @@
             </svg> share</a>
     </div>
     <!-- end share-->
+    
+    <div class="additional-details">
+        <div class="other-album">
+            <h3><a href="/fe/albums.html">Tất cả Album</a></h3>
+            <div class="album-container">
+            <script>
+                const albumResult = document.querySelector(".album-container");
+
+                async function layDuLieuAlbum() {
+                    try {
+                        const phanHoi = await fetch("../be/getAlbum.php");
+                        const albums = await phanHoi.json();
+                        return albums;
+                    } catch (loi) {
+                        console.error('Lỗi khi lấy dữ liệu album:', loi);
+                        return [];
+                    }
+                }
+
+                (async () => {
+                    const albums = await layDuLieuAlbum();
+
+                    albums.forEach((item) => {
+                        albumResult.innerHTML += `
+                        <div class="album">
+                            <a href="./albumDetail.php?albumID=${item.release_id}" class="album">
+                                <img src="${item.image}" alt="ảnh Album">
+                                <span>
+                                    ${item.rel_name}
+                                </span>
+                            </a>
+                        </div>`;
+                    });
+                })();
+            </script>
+        </div>
+        </div>
+    </div>
 </div>
 <!-- end content -->
 

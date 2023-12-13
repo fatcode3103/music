@@ -154,7 +154,7 @@
                 albums.forEach((item) => {
                     albumResult.innerHTML += `
                     <div class="album">
-                        <a href="./albumDetail.html">
+                        <a href="./albumDetail.php?albumID=${item.release_id}">
                             <img src="${item.image}" alt="Album 1">
                             <span class="name_album">${item.rel_name}</span>
                             <span class="play-icon material-icons">play_circle_outline</span>

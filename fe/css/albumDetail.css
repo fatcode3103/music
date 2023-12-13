@@ -1083,6 +1083,9 @@ button {
 .other-album{
   width: 35%;
 }
+.other-album a{
+  color: #fff;
+}
 .additional-details h3 {
   color: #fff;
   font-size: 24px;

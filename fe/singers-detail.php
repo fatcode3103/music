@@ -244,7 +244,7 @@ $detail = $singer->getSingerById($singerId);
                     <!-- title -->
                     <div class="col-12">
                         <div class="main__title">
-                            <h2>Tất cả nghệ sĩ</h2>
+                            <h2><a href="./singers.html">Tất cả nghệ sĩ</a></h2>
                         </div>
                     </div>
                     <!-- end title -->

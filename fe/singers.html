@@ -153,7 +153,7 @@
                 singers.forEach((item) => {
                     singerResult.innerHTML += `
                     <div class="artist">
-                        <a href="singers-detail.html" class="artist">
+                        <a href="./singers-detail.php?singerID=${item.singer_id}" class="artist">
                             <img src="${item.image}" alt="Nghệ sĩ 1">
                             <span>${item.stage_name}</span>
                         </a>

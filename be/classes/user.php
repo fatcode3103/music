@@ -77,4 +77,12 @@ class User
         $res = DB::execute($sql, $data);
         return $res;
     }
+    function updatePassword($data)
+    {
+        $sql = "UPDATE users
+                SET password = ?
+                WHERE username = ?;
+                ";
+        $res = DB::execute($sql, $data);
+    }
 }

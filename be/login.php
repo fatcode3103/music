@@ -24,6 +24,7 @@ if (isset($_POST['admin'])) {
             header("Location: ../fe/index.html");
         } else {
             $error_message = $res;
+            header("Location: ../fe/login.html");
         }
     } else {
         $error_message = "Xin vui lòng điền đầy đủ vào những ô trống cần thiết !";

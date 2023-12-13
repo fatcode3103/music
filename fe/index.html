@@ -197,8 +197,8 @@
                     albums.forEach((item) => {
                         albumResult.innerHTML += `
                         <div class="album">
-                            <a href="./albums.html" class="album">
-                                <img src="${item.image}" alt="Album 1">
+                            <a href="./albumDetail.html?albumID=${item.release_id}" class="album">
+                                <img src="${item.image}" alt="ảnh Album">
                                 <span>
                                     ${item.rel_name}
                                 </span>
@@ -235,7 +235,7 @@
                     singers.forEach((item) => {
                         singerResult.innerHTML += `
                         <div class="artist">
-                            <a href="./singers.html" class="artist">
+                            <a href="./singers-detail.php?singerID=${item.singer_id}" class="artist" >
                                 <img src="${item.image}" alt="Nghệ sĩ 1">
                                 <span>${item.stage_name}</span>
                             </a>
@@ -277,12 +277,12 @@
                                 </svg>
                             </a>
                             <div class="single-item__title">
-                                <h4><a href="#">Cinematic</a></h4>
-                                <span><a href="artist.html">AudioPizza</a></span>
+                                <h4><a href="#">Hai</a></h4>
+                                <span><a href="artist.html">Bello</a></span>
                             </div>
                             <span class="single-item__time">2:35</span>
                             <a data-playlist data-title="1. Got What I Got" data-artist="Jason Aldean"
-                                data-img="img/covers/cover.svg" href="./audio/5Ma Thu Cho Em  Trinh.mp3">
+                                data-img="" href="./audio/5Ma Thu Cho Em  Trinh.mp3">
                             </a>
                         </li>
                     </ul>

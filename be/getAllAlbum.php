@@ -7,6 +7,5 @@ $allAlbums = new Release;
 echo json_encode($allAlbums->getAllAlbum());
 exit();
 
-//Delete Album by ID
 
 

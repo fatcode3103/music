@@ -1,7 +1,7 @@
 <?php
 include_once "./classes/artist.php";
 
-$allSinger = new Artist;
+$allSinger = new Artist();
 
 echo json_encode($allSinger->getAllSingers());
 

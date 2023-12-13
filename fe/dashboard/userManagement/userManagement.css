@@ -174,3 +174,11 @@ table tr td:last-child i:hover {
     cursor: pointer;
     opacity: 0.8;
 }
+
+#pagination {
+    color: #fff;
+    margin-top: 20px;
+    display: flex !important;
+    gap: 10px;
+    align-items: center;
+}

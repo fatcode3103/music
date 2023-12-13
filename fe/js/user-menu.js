@@ -30,7 +30,7 @@ logoutBtn.onclick = async () => {
     try {
         const params = new URLSearchParams();
         params.append("logout", true);
-        const url = "http://localhost:3000/be/logout.php?" + params.toString();
+        const url = "../../../be/logout.php?" + params.toString();
         const response = await fetch(url, {
             method: "get",
             headers: {
@@ -40,7 +40,7 @@ logoutBtn.onclick = async () => {
         if (!response.ok || response.status !== 200) {
             alert("Logout failed !");
         } else {
-            window.location.href = "http://localhost:3000/fe/login.html";
+            window.location.href = "../../../fe/login.html";
         }
     } catch (e) {
         console.log(e);

@@ -59,4 +59,22 @@ class User
         $res = DB::execute($sql, $data);
         return $res;
     }
+    function updateBasicInfoUser($data)
+    {
+        $name = $data["name"];
+        $username = $data["username"];
+        $user_id = $data["user_id"];
+
+        $sql = "UPDATE users
+                SET name = ?, username = ?
+                WHERE user_id = ?;
+                ";
+        $data = array(
+            $name,
+            $username,
+            $user_id
+        );
+        $res = DB::execute($sql, $data);
+        return $res;
+    }
 }

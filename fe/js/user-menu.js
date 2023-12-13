@@ -5,8 +5,7 @@ const logoutBtn = document.querySelector(".logout-menu-user");
 
 document.addEventListener("DOMContentLoaded", () => {
     const usernameCookie = getCookie("username");
-
-    if (usernameCookie === "user") {
+    if (usernameCookie) {
         avartarUser.style.display = "block";
     } else {
         btnLogin.style.display = "block";

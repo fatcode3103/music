@@ -29,6 +29,11 @@
             sizes="32x32"
         />
         <link rel="apple-touch-icon" href="./img/favicon-32x32.png" />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+        />
     </head>
 
     <body>
@@ -191,8 +196,8 @@
                         <img src="./img/avatar.svg" alt="" />
                     </div>
                     <div class="profile__meta">
-                        <h3>John Doe</h3>
-                        <span>ID: 11104</span>
+                        <h3 class="user-name-profile"></h3>
+                        <span class="user-id-profile"></span>
                     </div>
                 </div>
                 <!-- tabs -->
@@ -299,7 +304,7 @@
                                     >
                                         <div class="sign__group">
                                             <label
-                                                class="sign__label"
+                                                class="sign__label user-name-profile"
                                                 for="firstname"
                                                 >Tên của bạn</label
                                             >
@@ -307,7 +312,7 @@
                                                 id="firstname"
                                                 type="text"
                                                 name="firstname"
-                                                class="sign__input"
+                                                class="sign__input name-profile-setting"
                                                 placeholder="John"
                                             />
                                         </div>
@@ -326,14 +331,17 @@
                                                 id="username"
                                                 type="text"
                                                 name="username"
-                                                class="sign__input"
+                                                class="sign__input user-name-profile-setting"
                                                 placeholder="User123"
                                             />
                                         </div>
                                     </div>
 
                                     <div class="col-12">
-                                        <button class="sign__btn" type="button">
+                                        <button
+                                            class="sign__btn btn-change-username"
+                                            type="button"
+                                        >
                                             Lưu
                                         </button>
                                     </div>
@@ -731,6 +739,10 @@
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
             integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
             crossorigin="anonymous"
+        ></script>
+        <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/toastify-js"
         ></script>
     </body>
 </html>

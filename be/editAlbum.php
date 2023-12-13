@@ -2,26 +2,17 @@
 include "classes/release.php";
 
 //Xử lí form cập nhật album
-
-
 if (isset($_REQUEST['submit1']))
-if ($_POST['rel_name'] != "" 
-    && $_POST['image'] != ""
-    && $_POST['singer_id'] != ""
-    && $_POST['about'] != ""
-    && $_REQUEST['release_id'] != "") 
+if ( $_POST['release_id'] != "") 
     {   
         $name = $_POST['rel_name'];
         $img= $_POST['image'];
         $si_id = $_POST['singer_id'];
         $about = $_POST['about'];
-        $id = $_REQUEST['release_id'];
+        $id = $_POST['release_id'];
+
         $alb = new Release();
-
-        // $username = $_POST['username'];
-        // $password = $_POST['password'];
-
-        $data = [$name, $img, $si_id, $about,$id];
+        $data = [$name, $img, $about,$si_id,$id];
         $res = $alb->editAlbumById($data);
 
         if ($res === true) {
@@ -30,9 +21,10 @@ if ($_POST['rel_name'] != ""
             $error_message = $res;
         }
     } else {
-        $error_message = "Xin vui lòng điền đầy đủ vào những ô trống cần thiết !";
+        $error_message = "Lỗi khi lấy ID";
     }
     echo "<script type='text/javascript'>
             alert('$error_message');
-            
+            // window.location.href = '../fe/dashboard/albumManagement/albumManagement.html';           
           </script>";
+    header("Location: ../fe/dashboard/albumManagement/albumManagement.html");

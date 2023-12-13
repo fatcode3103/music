@@ -25,11 +25,12 @@ class Release
         $album = DB::execute($sql);
         return $album;
     }
-    static public function getAlbum()
+    static public function getAlbum($id)
     {
-        $sql = "SELECT * FROM releases";
-        $album = DB::execute($sql);
-        return $album;
+        $sql = "select * from releases where release_id = ? ;";
+        $data = array($id);
+        $albumID = DB::execute($sql, $data);
+        return $albumID;
     }
     
     public function addAlbum($newAlbum)
@@ -51,10 +52,10 @@ class Release
 
     function editAlbumById($data)
     {  
-        $sql = "UPDATE `releases` 
-                SET `rel_name` = ?, `about` = ?, `image` = ?, `singer_id` = ?
+        $sql = "update releases 
+                set rel_name = ?, about = ?, image = ?, singer_id = ?
                 where release_id = ?;";        
         $rep = DB::execute($sql, $data);
-        return $rep;
+        return empty($rep);
     }
 }

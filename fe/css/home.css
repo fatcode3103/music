@@ -1325,7 +1325,7 @@ button {
 .album span {
   display: block;
   margin-top: 10px;
-  padding-left: 30px;
+  /* padding-left: 30px; */
   text-align: center;
 }
 
@@ -2025,7 +2025,7 @@ button {
     padding: 30px 15px 70px;
   }
   .main__title {
-    margin-top: 70px;
+    margin-top: 10px;
     margin-bottom: 0;
   }
   .main__title h1 {

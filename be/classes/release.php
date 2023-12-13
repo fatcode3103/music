@@ -32,7 +32,7 @@ class Release
         $albumID = DB::execute($sql, $data);
         return $albumID;
     }
-    
+
     public function addAlbum($newAlbum)
     {
 
@@ -51,11 +51,21 @@ class Release
     }
 
     function editAlbumById($data)
-    {  
+    {
         $sql = "update releases 
                 set rel_name = ?, about = ?, image = ?, singer_id = ?
-                where release_id = ?;";        
+                where release_id = ?;";
         $rep = DB::execute($sql, $data);
         return empty($rep);
+    }
+    function searchByName($keywords)
+    {
+        $sql = "SELECT releases.*, singers.stage_name
+                FROM releases
+                LEFT JOIN singers ON releases.singer_id = singers.singer_id
+                WHERE releases.rel_name LIKE :keywords;";
+        $data = array(':keywords' => '%' . $keywords . '%');
+        $res = DB::execute($sql, $data);
+        return $res;
     }
 }

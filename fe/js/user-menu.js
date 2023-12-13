@@ -45,4 +45,59 @@ logoutBtn.onclick = async () => {
         console.log(e);
     }
 };
-//
+//search
+const searchInput = document.querySelector(".search-input");
+const searchButton = document.querySelector(".search-btn");
+
+searchButton.addEventListener("click", function () {
+    performSearch();
+});
+
+searchInput.addEventListener("keydown", function (event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        performSearch();
+    }
+});
+
+const performSearch = async () => {
+    try {
+        const searchTerm = searchInput.value.trim();
+
+        if (searchTerm !== "") {
+            const response = await fetch(
+                `../../be/search.php?param=${searchTerm}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            if (response.ok && response.status === 200) {
+                const res = await response.json();
+                localStorage.setItem("searchResult", JSON.stringify(res));
+                window.location.href = `../../fe/search.html?q=${searchTerm}`;
+            } else {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+        } else {
+            Toastify({
+                text: "Missing search term",
+                className: "success",
+                position: "center",
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                },
+            }).showToast();
+        }
+    } catch (e) {
+        Toastify({
+            text: e,
+            className: "success",
+            position: "center",
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+        }).showToast();
+    }
+};

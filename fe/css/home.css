@@ -1242,6 +1242,7 @@ button {
 .artist {
   color: #fff;
   width: 129px;
+  height: 129px;
   margin: 10px;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
@@ -1253,8 +1254,10 @@ button {
 }
 
 .artist img {
-  width: 100%;
+  width: 129px;
   border-radius: 50%;
+  object-fit: cover;
+  height: 129px;
 }
 
 .artist span {
@@ -1301,7 +1304,14 @@ button {
 
 .album {
   display: flex;
-  flex-wrap: wrap;
+  color: #fff;
+  width: 129px;
+  margin: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .album {
@@ -1318,8 +1328,10 @@ button {
 }
 
 .album img {
-  width: 100%;
+  width: 129px;
+  height: 129px;
   border-radius: 10%;
+  object-fit: cover;
 }
 
 .album span {

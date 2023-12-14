@@ -950,7 +950,7 @@ body::-webkit-scrollbar-thumb {
     margin: auto;
     padding: 20px;
     padding-left: 22%;
-    background-color: #212529; /* Màu nền tối */
+    background-color: #212529 !important; /* Màu nền tối */
     color: white; /* Màu chữ trắng */
 }
 .title-singers {
@@ -1584,7 +1584,7 @@ button {
     position: relative;
     margin-top: 70px;
     padding: 20px 0 60px;
-    background-color: #16151a;
+    background-color: #212529;
 }
 .main__title {
     display: flex;

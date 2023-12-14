@@ -1023,13 +1023,15 @@ button {
 }
 
 .album img {
-  width: 100%;
+  width: 129px;
+  height: 129px;
+  object-fit: cover;
   border-radius: 12px;
 }
 .album span {
   display: block;
   margin-top: 10px;
-  text-align: left;
+  text-align: center;
 
 }
 .name_album{

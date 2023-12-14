@@ -2025,6 +2025,7 @@ button {
     padding: 30px 15px 70px;
   }
   .main__title {
+    /* margin-top: 70px; */
     margin-top: 10px;
     margin-bottom: 0;
   }

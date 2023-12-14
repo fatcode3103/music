@@ -1,13 +1,20 @@
 <?php
 include_once "../be/classes/release.php";
 
+//Lấy detail của release
 $AlbumDT = new Release();
 $Id = $_GET['albumID'];
 
 $detail = $AlbumDT->getAlbum($Id);
 
-// echo $detail[0]["image"];
-
+//Lấy dữ liệu tổng hợp từ track
+$query = " SELECT tracks.*, singers.stage_name, count(track_id) as TongBaiHat, round(avg(listen)) as luotNghe
+        FROM tracks
+        JOIN releases ON tracks.release_id = releases.release_id
+        JOIN singers ON releases.singer_id = singers.singer_id
+        WHERE tracks.release_id = ?";
+$data = array($Id);
+$songs = DB::execute($query,$data);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -124,21 +131,26 @@ $detail = $AlbumDT->getAlbum($Id);
     </ul>
     <!-- end sidebar nav -->
     <!-- player -->
-<div class="player d-none">
-    <div class="player__cover">
-        <img src="img/covers/cover.svg" alt="">
-    </div>
+    <div class="player d-none">
+            <div class="player__cover">
+                <img src="img/covers/cover.svg" alt="">
+            </div>
 
-    <div class="player__content">
-        <span class="player__track"><b class="player__title">Epic Cinematic</b> – <span
-                class="player__artist">AudioPizza</span></span>
-        <div class="audio">
-            <audio src="./audio/5Ma Thu Cho Em  Trinh.mp3" id="audio" controls preload="none"></audio>
+            <div class="player__content">
+                <span class="player__track"><b class="player__title">Epic Cinematic</b> – <span
+                        class="player__artist">AudioPizza</span></span>
+                <div class="audio">
+                    <audio id="audio" controls preload="none" data-track-id="">
+                        <source
+                            src=""
+                            type="audio">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-<button class="player__btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <button class="player__btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path
             d="M21.65,2.24a1,1,0,0,0-.8-.23l-13,2A1,1,0,0,0,7,5V15.35A3.45,3.45,0,0,0,5.5,15,3.5,3.5,0,1,0,9,18.5V10.86L20,9.17v4.18A3.45,3.45,0,0,0,18.5,13,3.5,3.5,0,1,0,22,16.5V3A1,1,0,0,0,21.65,2.24ZM5.5,20A1.5,1.5,0,1,1,7,18.5,1.5,1.5,0,0,1,5.5,20Zm13-2A1.5,1.5,0,1,1,20,16.5,1.5,1.5,0,0,1,18.5,18ZM20,7.14,9,8.83v-3L20,4.17Z" />
     </svg> Player</button>
@@ -157,62 +169,91 @@ $detail = $AlbumDT->getAlbum($Id);
             <div class="count-songs-album">
                 <div class="music-note-icon">
                     <i class="material-icons">music_note</i>
-                    <span class="count">???track.coutnt</span>
+                    <span class="count">Bài hát: <?php echo $songs[0]['TongBaiHat']; ?></span>
                 </div>
                 <div class="head-phone-icon">
                     <i class="material-icons">headset</i>
-                    <span class="count">???track.listen</span>
+                    <span class="count">Trung bình nghe:<?php echo $songs[0]['luotNghe'];?></span>
                 </div>
             </div>
         </div>
         <div class="song-list-container">
-            <ul class="song-list">
-                <li class="single-item" onclick="listen(this)">
-                    <a class="single-item__cover">
-                        <img src="img/artists/artist1.jpg" alt="">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path
-                                d="M18.54,9,8.88,3.46a3.42,3.42,0,0,0-5.13,3V17.58A3.42,3.42,0,0,0,7.17,21a3.43,3.43,0,0,0,1.71-.46L18.54,15a3.42,3.42,0,0,0,0-5.92Zm-1,4.19L7.88,18.81a1.44,1.44,0,0,1-1.42,0,1.42,1.42,0,0,1-.71-1.23V6.42a1.42,1.42,0,0,1,.71-1.23A1.51,1.51,0,0,1,7.17,5a1.54,1.54,0,0,1,.71.19l9.66,5.58a1.42,1.42,0,0,1,0,2.46Z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path
-                                d="M16,2a3,3,0,0,0-3,3V19a3,3,0,0,0,6,0V5A3,3,0,0,0,16,2Zm1,17a1,1,0,0,1-2,0V5a1,1,0,0,1,2,0ZM8,2A3,3,0,0,0,5,5V19a3,3,0,0,0,6,0V5A3,3,0,0,0,8,2ZM9,19a1,1,0,0,1-2,0V5A1,1,0,0,1,9,5Z" />
-                        </svg>
-                    </a>
-                    <div class="single-item__title">
-                        <h4><a href="#">1. Melody 1</a></h4>
-                        <span><a href="singers.html">Anonymous</a></span>
-                    </div>
-                    
-                    <a data-playlist data-title="1. Got What I Got" data-artist="Jason Aldean"
-                        data-img="img/covers/cover.svg" href="./audio/5Ma Thu Cho Em  Trinh.mp3">
-                    </a>
-                </li>
+            <ul class="song-list" id="songList">                
             </ul>
         </div> 
+        <script>
+                        const songList = document.getElementById("songList");
+                    
+                        async function fetchSongs(albumID) {
+                            try {
+                                var formData = new FormData();
+                                formData.append("albumID", albumID);
+                                const response = await fetch(`http://localhost:3000/be/getSongInAlbum.php?albumID=${albumID}`, {
+                                    method: "GET",
+                                }); // Cập nhật đường dẫn
+                                
+                                const songs = await response.json();
+                                return songs;
+                            } catch (error) {
+                                console.error('Lỗi khi lấy dữ liệu bài hát:', error);
+                                return [];
+                            }
+                        }
+                    
+                        async function displaySongs() {
+                            const songs = await fetchSongs(<?php echo $Id;?>);
+                    
+                            songs.forEach((song) => {
+                                const listItem = document.createElement('li');
+                                listItem.className = 'single-item';
+                                listItem.onclick = () => listen(song);
+                    
+                                listItem.innerHTML = `
+                                    <a class="single-item__cover">
+                                        <img src="${song.image}" alt="Ảnh Album">                                       
+                                    </a>
+                                    <div class="single-item__title">
+                                        <h4><a href="#">${song.trackname}</a></h4>
+                                        <span><a href="artist.html">${song.stage_name}</a></span>
+                                    </div>
+                                    <span class="single-item__time">${song.listen}</span>
+                                `;
+                    
+                                const audioLink = document.createElement('a');
+                                audioLink.setAttribute('data-playlist', '');
+                                audioLink.setAttribute('data-title', song.trackname);
+                                audioLink.setAttribute('data-artist', song.stage_name);
+                                audioLink.setAttribute('data-img', song.image);
+                                audioLink.setAttribute('href', song.source);
+                                listItem.appendChild(audioLink);
+                    
+                                songList.appendChild(listItem);
+                            });
+                        }
+                    
+                        displaySongs();
+                    </script>
     </div>
-    
+    <script>
+                    const audioElement = document.getElementById("audio");
+                
+                    function listen(song) {
+                        audioElement.pause();
+                        audioElement.currentTime = 0;
+                        document.querySelector('.player__content span b').textContent = `${song.stage_name}. ${song.trackname}`;
+                        document.querySelector('.player__content span span').textContent = song.stage_name;
+                        document.querySelector('.player__cover img').src = song.image;
+                        document.querySelector('.player__content').parentNode.classList.remove('d-none');
+                        audioElement.src = song.source;
+                        audioElement.play();
+                    }
+                </script>
     <div class="additional-details">
         <div class="info-more">
             <h3>Thông tin </h3>
             <p><?php echo $detail[0]["about"];?></p>
         </div>
     </div>
-    
-    <script>
-        function listen(element) {
-            document.querySelector('#audio').pause()
-            document.querySelector('#audio').currentTime = 0
-            fetch("backend/edit.php?track_listen=" + element.querySelector('a.single-item__cover').getAttribute('track_id'))
-                .then((response) => response.json())
-
-            document.querySelector('.player__content span b').textContent = element.querySelector('span').textContent + ". " + element.querySelector('h4').textContent
-            document.querySelector('.player__content span span').textContent = element.querySelector('.single-item__title span').textContent
-            document.querySelector('.player__cover img').src = element.querySelector('img').src
-            document.querySelector('.player__content').parentNode.classList.remove('d-none')
-            document.querySelector('#audio').play()
-        }
-    </script>
     <!-- share -->
     <div class="share">
         <a href="#" class="share__link share__link--fb"><svg width="9" height="17"
@@ -431,7 +472,6 @@ $detail = $AlbumDT->getAlbum($Id);
 </footer>
 <!-- end footer -->
 
-<!-- <script src="./js/albums.js"> </script> -->
 <script src="./js/home.js"></script>
 <script src="./js/user-menu.js"> </script>
 

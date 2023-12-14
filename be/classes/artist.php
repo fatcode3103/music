@@ -77,4 +77,14 @@ class Artist
         $res = DB::execute($sql, $data);
         return $res;
     }
+    function searchByName($keywords)
+    {
+        $sql = "SELECT *
+                FROM singers
+                WHERE stage_name LIKE :keywords
+           ";
+        $data = array(':keywords' => '%' . $keywords . '%');
+        $res = DB::execute($sql, $data);
+        return $res;
+    }
 }

@@ -19,17 +19,16 @@
             </a>
         </div>
 
-        <form action="search.html" class="header__search">
-            <input type="text" placeholder="Nghệ sĩ, album hoặc bài hát" name="q">
-            <button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path
-                        d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z" />
-                </svg></button>
-            <button type="button" class="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path
-                        d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
-                </svg></button>
-        </form>
+        <!-- search -->
+            <form class="header__search" class="search-form">
+                <input type="text" placeholder="Nghệ sĩ, album hoặc bài hát" class="search-input">
+                <button class="search-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z" />
+                    </svg></button>
+            </form>
+            <!--  -->
+
         <div class="header__actions">
             <div class="header__action header__action--search">
                 <button class="header__action-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg"
@@ -114,71 +113,7 @@
 <main class="main">
     <div class="container-fluid">
 
-        <!-- releases -->
-        <section class="row row--grid releases">
-            <!-- title -->
-            <div class="col-12">
-                <div class="main__title">
-                    <h2>Album mới</h2>
-                </div>
-            </div>
-            <!-- end title -->
-
-            <div class="col-lg-2 col-md-4 col-sm-3">
-                <div class="album">
-                    <div class="album__cover">
-                        <img src="/fe/img/album/cover8.jpg" alt="">
-                        <a href="/fe/albums.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path
-                                    d="M18.54,9,8.88,3.46a3.42,3.42,0,0,0-5.13,3V17.58A3.42,3.42,0,0,0,7.17,21a3.43,3.43,0,0,0,1.71-.46L18.54,15a3.42,3.42,0,0,0,0-5.92Zm-1,4.19L7.88,18.81a1.44,1.44,0,0,1-1.42,0,1.42,1.42,0,0,1-.71-1.23V6.42a1.42,1.42,0,0,1,.71-1.23A1.51,1.51,0,0,1,7.17,5a1.54,1.54,0,0,1,.71.19l9.66,5.58a1.42,1.42,0,0,1,0,2.46Z" />
-                            </svg></a>
-                        <span class="album__stat">
-                            <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path
-                                        d="M3.71,16.29a1,1,0,0,0-.33-.21,1,1,0,0,0-.76,0,1,1,0,0,0-.33.21,1,1,0,0,0-.21.33,1,1,0,0,0,.21,1.09,1.15,1.15,0,0,0,.33.21.94.94,0,0,0,.76,0,1.15,1.15,0,0,0,.33-.21,1,1,0,0,0,.21-1.09A1,1,0,0,0,3.71,16.29ZM7,8H21a1,1,0,0,0,0-2H7A1,1,0,0,0,7,8ZM3.71,11.29a1,1,0,0,0-1.09-.21,1.15,1.15,0,0,0-.33.21,1,1,0,0,0-.21.33.94.94,0,0,0,0,.76,1.15,1.15,0,0,0,.21.33,1.15,1.15,0,0,0,.33.21.94.94,0,0,0,.76,0,1.15,1.15,0,0,0,.33-.21,1.15,1.15,0,0,0,.21-.33.94.94,0,0,0,0-.76A1,1,0,0,0,3.71,11.29ZM21,11H7a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2ZM3.71,6.29a1,1,0,0,0-.33-.21,1,1,0,0,0-1.09.21,1.15,1.15,0,0,0-.21.33.94.94,0,0,0,0,.76,1.15,1.15,0,0,0,.21.33,1.15,1.15,0,0,0,.33.21,1,1,0,0,0,1.09-.21,1.15,1.15,0,0,0,.21-.33.94.94,0,0,0,0-.76A1.15,1.15,0,0,0,3.71,6.29ZM21,16H7a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2Z" />
-                                </svg> </span>
-                            <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path
-                                        d="M20,13.18V11A8,8,0,0,0,4,11v2.18A3,3,0,0,0,2,16v2a3,3,0,0,0,3,3H8a1,1,0,0,0,1-1V14a1,1,0,0,0-1-1H6V11a6,6,0,0,1,12,0v2H16a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1h3a3,3,0,0,0,3-3V16A3,3,0,0,0,20,13.18ZM7,15v4H5a1,1,0,0,1-1-1V16a1,1,0,0,1,1-1Zm13,3a1,1,0,0,1-1,1H17V15h2a1,1,0,0,1,1,1Z" />
-                                </svg> </span>
-                        </span>
-                    </div>
-                    <div class="album__title">
-                        <h3>Space Melody</h3>
-                        <span><a href="/fe/singers.html">VIZE</a></span>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-        <!-- end releases -->
-
-        <!-- articts -->
-        <section class="row row--grid articts">
-            <!-- title -->
-            <div class="col-12">
-                <div class="main__title">
-                    <h2>Nghệ sĩ</h2>
-                </div>
-            </div>
-            <!-- end title -->
-
-            <div class="col-12">
-                <div class="row row--grid list">
-                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                        <a href="/fe/singers.html" class="artist">
-                            <div class="artist__cover">
-                                <img src="img/artists/artist1.jpg" alt="">
-                            </div>
-                            <h3 class="artist__title">BENEE Featuring</h3>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- end articts -->
-
-        <!-- track -->
+         <!-- track -->
         <section class="row row--grid track">
             <!-- title -->
             <div class="col-12">
@@ -193,30 +128,143 @@
             </div>
             <!-- end title -->
 
-            <div class="col-lg-2 col-md-4 col-sm-3">
-                <div class="album">
-                    <div class="album__cover">
-                        <img src="/fe/img/album/cover2.jpg" alt="">
-                        <a href="/fe/albums.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path
-                                    d="M18.54,9,8.88,3.46a3.42,3.42,0,0,0-5.13,3V17.58A3.42,3.42,0,0,0,7.17,21a3.43,3.43,0,0,0,1.71-.46L18.54,15a3.42,3.42,0,0,0,0-5.92Zm-1,4.19L7.88,18.81a1.44,1.44,0,0,1-1.42,0,1.42,1.42,0,0,1-.71-1.23V6.42a1.42,1.42,0,0,1,.71-1.23A1.51,1.51,0,0,1,7.17,5a1.54,1.54,0,0,1,.71.19l9.66,5.58a1.42,1.42,0,0,1,0,2.46Z" />
-                            </svg></a>
-                        <span class="album__stat">
-                            <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path
-                                        d="M20,13.18V11A8,8,0,0,0,4,11v2.18A3,3,0,0,0,2,16v2a3,3,0,0,0,3,3H8a1,1,0,0,0,1-1V14a1,1,0,0,0-1-1H6V11a6,6,0,0,1,12,0v2H16a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1h3a3,3,0,0,0,3-3V16A3,3,0,0,0,20,13.18ZM7,15v4H5a1,1,0,0,1-1-1V16a1,1,0,0,1,1-1Zm13,3a1,1,0,0,1-1,1H17V15h2a1,1,0,0,1,1,1Z" />
-                                </svg> </span>
-                        </span>
-                    </div>
-                    <div class="album__title">
-                        <h3>Space Melody</h3>
-                        <span>Osad</span>
-                    </div>
-                </div>
+            <div class="song-wrapper">
             </div>
+            <script>
+                const songWrapper = document.querySelector(".song-wrapper");
+                const searchDataSong = JSON.parse(localStorage.getItem("searchResult")).track;
+                if(searchDataSong.length > 0){
+                    searchDataSong.forEach(item => {
+                        const childrenSong = document.createElement("div");
+                        childrenSong.className = "col-lg-2 col-md-4 col-sm-3";
+                        childrenSong.innerHTML = `
+                                <div class="album">
+                                    <div class="album__cover">
+                                        <img src="${item.image}" alt="">
+                                        <a href="/fe/albums.html">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M18.54,9,8.88,3.46a3.42,3.42,0,0,0-5.13,3V17.58A3.42,3.42,0,0,0,7.17,21a3.43,3.43,0,0,0,1.71-.46L18.54,15a3.42,3.42,0,0,0,0-5.92Zm-1,4.19L7.88,18.81a1.44,1.44,0,0,1-1.42,0,1.42,1.42,0,0,1-.71-1.23V6.42a1.42,1.42,0,0,1,.71-1.23A1.51,1.51,0,0,1,7.17,5a1.54,1.54,0,0,1,.71.19l9.66,5.58a1.42,1.42,0,0,1,0,2.46Z" />
+                                            </svg></a>
+                                        <span class="album__stat">
+                                            <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M20,13.18V11A8,8,0,0,0,4,11v2.18A3,3,0,0,0,2,16v2a3,3,0,0,0,3,3H8a1,1,0,0,0,1-1V14a1,1,0,0,0-1-1H6V11a6,6,0,0,1,12,0v2H16a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1h3a3,3,0,0,0,3-3V16A3,3,0,0,0,20,13.18ZM7,15v4H5a1,1,0,0,1-1-1V16a1,1,0,0,1,1-1Zm13,3a1,1,0,0,1-1,1H17V15h2a1,1,0,0,1,1,1Z" />
+                                                </svg> </span>
+                                        </span>
+                                    </div>
+                                    <div class="album__title">
+                                        <h3>${item.trackname}</h3>
+                                    </div>
+                                </div>
+                        `;
+                        songWrapper.appendChild(childrenSong);
+                    });
+                }else{
+                    songWrapper.innerHTML='<p style="color: red; margin: 20px 0px 0px 14px">Không có dữ liệu</p>'
+                }
+            </script>
 
         </section>
         <!-- end track -->
+
+        <!-- articts -->
+        <section class="row row--grid articts">
+            <!-- title -->
+            <div class="col-12">
+                <div class="main__title">
+                    <h2>Nghệ sĩ</h2>
+                </div>
+            </div>
+            <!-- end title -->
+
+            <div class="singer-wrapper">
+            </div>
+            <script>
+                const singerWrapper = document.querySelector(".singer-wrapper");
+                const searchDataSinger = JSON.parse(localStorage.getItem("searchResult")).singer;
+                if(searchDataSinger.length > 0){
+                    searchDataSinger.forEach(item => {
+                        const childrenSinger = document.createElement("div");
+                        childrenSinger.innerHTML = `
+                            <div class="singer-item">
+                                <a href="/fe/singers.html" class="artist">
+                                    <div class="artist__cover">
+                                        <img src="${item.image}" alt="">
+                                    </div>
+                                    <h3 class="artist__title">${item.stage_name}</h3>
+                                </a>
+                            </div>
+                        `;
+                        singerWrapper.appendChild(childrenSinger);
+                    });
+                }else{
+                    singerWrapper.innerHTML='<p style="color: red; margin: 20px 0px 0px 14px">Không có dữ liệu</p>'
+                }
+            </script>
+        </section>
+        <!-- end articts -->
+
+        <!-- releases -->
+        <section class="row row--grid releases">
+            <!-- title -->
+            <div class="col-12">
+                <div class="main__title">
+                    <h2>Album mới</h2>
+                </div>
+            </div>
+            <!-- end title -->
+
+            <div class="album-wrapper">
+            </div>
+            <script>
+                console.log(JSON.parse(localStorage.getItem("searchResult")))
+                const container = document.querySelector(".album-wrapper");
+                const searchDataAlbum = JSON.parse(localStorage.getItem("searchResult")).release;
+                if(searchDataAlbum.length > 0){
+                    searchDataAlbum.forEach(album => {
+                        const childrenAlbum = document.createElement("div");
+                        childrenAlbum.className = "col-lg-2 col-md-4 col-sm-3";
+                        childrenAlbum.innerHTML = `
+                            <div class="album">
+                                <div class="album__cover">
+                                    <img src="${album.image}" alt="">
+                                    <a href="./albumDetail.php?albumID=${album.release_id}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path d="M18.54,9,8.88,3.46a3.42,3.42,0,0,0-5.13,3V17.58A3.42,3.42,0,0,0,7.17,21a3.43,3.43,0,0,0,1.71-.46L18.54,15a3.42,3.42,0,0,0,0-5.92Zm-1,4.19L7.88,18.81a1.44,1.44,0,0,1-1.42,0,1.42,1.42,0,0,1-.71-1.23V6.42a1.42,1.42,0,0,1,.71-1.23A1.51,1.51,0,0,1,7.17,5a1.54,1.54,0,0,1,.71.19l9.66,5.58a1.42,1.42,0,0,1,0,2.46Z"></path>
+                                        </svg>
+                                    </a>
+                                    <span class="album__stat">
+                                        <span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                <path d="M3.71,16.29a1,1,0,0,0-.33-.21,1,1,0,0,0-.76,0,1,1,0,0,0-.33.21,1,1,0,0,0-.21.33,1,1,0,0,0,.21,1.09,1.15,1.15,0,0,0,.33.21.94.94,0,0,0,.76,0,1.15,1.15,0,0,0,.33-.21,1,1,0,0,0,.21-1.09A1,1,0,0,0,3.71,16.29ZM7,8H21a1,1,0,0,0,0-2H7A1,1,0,0,0,7,8ZM3.71,11.29a1,1,0,0,0-1.09-.21,1.15,1.15,0,0,0-.33.21,1,1,0,0,0-.21.33.94.94,0,0,0,0,.76,1.15,1.15,0,0,0,.21.33,1.15,1.15,0,0,0,.33.21.94.94,0,0,0,.76,0,1.15,1.15,0,0,0,.33-.21,1.15,1.15,0,0,0,.21-.33.94.94,0,0,0,0-.76A1.15,1.15,0,0,0,3.71,11.29ZM21,11H7a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2ZM3.71,6.29a1,1,0,0,0-.33-.21,1,1,0,0,0-1.09.21,1.15,1.15,0,0,0-.21.33.94.94,0,0,0,0,.76,1.15,1.15,0,0,0,.21.33,1.15,1.15,0,0,0,.33.21,1,1,0,0,0,1.09-.21,1.15,1.15,0,0,0,.21-.33.94.94,0,0,0,0-.76A1.15,1.15,0,0,0,3.71,6.29ZM21,16H7a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2Z"></path>
+                                            </svg>
+                                        </span>
+                                        <span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                <path d="M20,13.18V11,A8,8,0,0,0,4,11v2.18A3,3,0,0,0,2,16v2a3,3,0,0,0,3,3H8a1,1,0,0,0,1-1V14a1,1,0,0,0-1-1H6V11a6,6,0,0,1,12,0v2H16a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1h3a3,3,0,0,0,3-3V16A3,3,0,0,0,20,13.18ZM7,15v4H5a1,1,0,0,1-1-1V16a1,1,0,0,1,1-1Zm13,3a1,1,0,0,1-1,1H17V15h2a1,1,0,0,1,1,1Z"></path>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="album__title">
+                                    <h3>${album.rel_name}</h3>
+                                    <span><a href="/fe/singers.html">${album.stage_name}</a></span>
+                                </div>
+                            </div>
+                        `;
+
+                        // Thêm phần tử album vào container
+                        container.appendChild(childrenAlbum);
+                    });
+                }else{
+                    container.innerHTML='<p style="color: red; margin: 20px 0px 0px 14px">Không có dữ liệu</p>'
+                }
+            </script>
+            
+
+        </section>
+        <!-- end releases -->
 
     </div>
 </main>
@@ -246,7 +294,7 @@
                 <h6 class="footer__title">Thông tin trang</h6>
                 <div class="footer__nav">
                     <a href="#">Về chúng tôi</a>
-                    <a href="#">Tài khoản</a>
+                    <a href="./profile.html">Tài khoản</a>
                     <a href="./contacts.html">Liên hệ</a>
                 </div>
             </div>
@@ -263,9 +311,9 @@
             <div class="col-md">
                 <h6 class="footer__title">Trợ giúp</h6>
                 <div class="footer__nav">
-                    <a href="#">Tài khoản</a>
-                    <a href="#">Hỗ trợ đa thiết bị</a>
-                    <a href="#">Khả năng tiếp cận</a>
+                    <a href="./contacts.html">Tài khoản</a>
+                    <a href="./contacts.html">Hỗ trợ đa thiết bị</a>
+                    <a href="./contacts.html">Khả năng tiếp cận</a>
                 </div>
             </div>
         </div>

@@ -1,3 +1,21 @@
+<?php
+include_once "../be/classes/release.php";
+
+//Lấy detail của release
+$AlbumDT = new Release();
+$Id = $_GET['albumID'];
+
+$detail = $AlbumDT->getAlbum($Id);
+
+//Lấy dữ liệu tổng hợp từ track
+$query = " SELECT tracks.*, singers.stage_name, count(track_id) as TongBaiHat, round(avg(listen)) as luotNghe
+        FROM tracks
+        JOIN releases ON tracks.release_id = releases.release_id
+        JOIN singers ON releases.singer_id = singers.singer_id
+        WHERE tracks.release_id = ?";
+$data = array($Id);
+$songs = DB::execute($query,$data);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,17 +45,15 @@
             </a>
         </div>
 
-        <form action="" class="header__search">
-            <input type="text" placeholder="Nghệ sĩ, album hoặc bài hát" name="q">
-            <button type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path
-                        d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z" />
-                </svg></button>
-            <button type="button" class="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path
-                        d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
-                </svg></button>
-        </form>
+        <!-- search -->
+            <form class="header__search" class="search-form">
+                <input type="text" placeholder="Nghệ sĩ, album hoặc bài hát" class="search-input">
+                <button class="search-btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z" />
+                    </svg></button>
+            </form>
+            <!--  -->
 
         <div class="header__actions">
             <div class="header__action header__action--search">
@@ -115,21 +131,26 @@
     </ul>
     <!-- end sidebar nav -->
     <!-- player -->
-<div class="player d-none">
-    <div class="player__cover">
-        <img src="img/covers/cover.svg" alt="">
-    </div>
+    <div class="player d-none">
+            <div class="player__cover">
+                <img src="img/covers/cover.svg" alt="">
+            </div>
 
-    <div class="player__content">
-        <span class="player__track"><b class="player__title">Epic Cinematic</b> – <span
-                class="player__artist">AudioPizza</span></span>
-        <div class="audio">
-            <audio src="./audio/5Ma Thu Cho Em  Trinh.mp3" id="audio" controls preload="none"></audio>
+            <div class="player__content">
+                <span class="player__track"><b class="player__title">Epic Cinematic</b> – <span
+                        class="player__artist">AudioPizza</span></span>
+                <div class="audio">
+                    <audio id="audio" controls preload="none" data-track-id="">
+                        <source
+                            src=""
+                            type="audio">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-<button class="player__btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <button class="player__btn" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path
             d="M21.65,2.24a1,1,0,0,0-.8-.23l-13,2A1,1,0,0,0,7,5V15.35A3.45,3.45,0,0,0,5.5,15,3.5,3.5,0,1,0,9,18.5V10.86L20,9.17v4.18A3.45,3.45,0,0,0,18.5,13,3.5,3.5,0,1,0,22,16.5V3A1,1,0,0,0,21.65,2.24ZM5.5,20A1.5,1.5,0,1,1,7,18.5,1.5,1.5,0,0,1,5.5,20Zm13-2A1.5,1.5,0,1,1,20,16.5,1.5,1.5,0,0,1,18.5,18ZM20,7.14,9,8.83v-3L20,4.17Z" />
     </svg> Player</button>
@@ -139,108 +160,100 @@
 <!-- content -->
 <div class="content-album-detail">
     <div class="title-name-album">
-        <h1>Space Melody</h1>
+        <h1><?php echo $detail[0]["rel_name"];?></h1>
     </div>
-     
+    <!-- ./img/album/cover1.jpg -->
     <div class="album-content">
         <div class="album-img">
-            <img src="./img/album/cover1.jpg" alt="Album Image" class="album-image">
+            <img src="<?php echo $detail[0]["image"];?>" alt="Album Image" class="album-image">
             <div class="count-songs-album">
                 <div class="music-note-icon">
                     <i class="material-icons">music_note</i>
-                    <span class="count">10 bài</span>
+                    <span class="count">Bài hát: <?php echo $songs[0]['TongBaiHat']; ?></span>
                 </div>
                 <div class="head-phone-icon">
                     <i class="material-icons">headset</i>
-                    <span class="count">10 lượt nghe</span>
+                    <span class="count">Trung bình nghe:<?php echo $songs[0]['luotNghe'];?></span>
                 </div>
             </div>
         </div>
         <div class="song-list-container">
-            <ul class="song-list">
-                <li class="single-item" onclick="listen(this)">
-                    <a class="single-item__cover">
-                        <img src="img/artists/artist1.jpg" alt="">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path
-                                d="M18.54,9,8.88,3.46a3.42,3.42,0,0,0-5.13,3V17.58A3.42,3.42,0,0,0,7.17,21a3.43,3.43,0,0,0,1.71-.46L18.54,15a3.42,3.42,0,0,0,0-5.92Zm-1,4.19L7.88,18.81a1.44,1.44,0,0,1-1.42,0,1.42,1.42,0,0,1-.71-1.23V6.42a1.42,1.42,0,0,1,.71-1.23A1.51,1.51,0,0,1,7.17,5a1.54,1.54,0,0,1,.71.19l9.66,5.58a1.42,1.42,0,0,1,0,2.46Z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path
-                                d="M16,2a3,3,0,0,0-3,3V19a3,3,0,0,0,6,0V5A3,3,0,0,0,16,2Zm1,17a1,1,0,0,1-2,0V5a1,1,0,0,1,2,0ZM8,2A3,3,0,0,0,5,5V19a3,3,0,0,0,6,0V5A3,3,0,0,0,8,2ZM9,19a1,1,0,0,1-2,0V5A1,1,0,0,1,9,5Z" />
-                        </svg>
-                    </a>
-                    <div class="single-item__title">
-                        <h4><a href="#">1. Melody 1</a></h4>
-                        <span><a href="singers.html">Anonymous</a></span>
-                    </div>
-                    
-                    <a data-playlist data-title="1. Got What I Got" data-artist="Jason Aldean"
-                        data-img="img/covers/cover.svg" href="./audio/5Ma Thu Cho Em  Trinh.mp3">
-                    </a>
-                </li>
+            <ul class="song-list" id="songList">                
             </ul>
         </div> 
-    </div>
-    
-    <div class="additional-details">
-        <div class="info-more">
-            <h3>Thông tin thêm</h3>
-            <p>Cô đơn trên sofa, con tim như tan ra
-                Dẫn lối em trôi theo một khúc ca buồn
-                Giữa căn phòng, ánh đèn chợt tắt, che đi giọt buồn sắp rơi
-                Cô đơn trên sofa, sao anh yêu cô ta?
-                Chẳng phải anh yêu em hơn cả anh mà?
-                Để cho thanh xuân này chợt tắt, trên mi giọt nước mắt rơi
-                Thì ra là thế, tình nào là tình chẳng mờ phai tháng năm
-                Một ngày vẫn trôi đôi môi em phai màu nắng
-                Nếu không em thì anh có buồn?
-                Hóa ra chỉ mình em đáng thương
-                Đừng buông lời hứa rồi lại vờ rằng dường như anh đã quên
-                Đừng tìm đến em gieo tương tư xong lại đi
-                Nắng xuyên qua hàng mi rối bời
-                Giữ tim em vài giây cuối thôi
-                Để em được ngã lưng lên một chiếc sofa
-                Để nghe một phút tim yên bình đến kỳ lạ
-            </p>
-        </div>
-        <div class="other-album">
-            <h3>Album Nhạc Khác</h3>
-            
-            <div class="albums-container" >
-                <div class="album" >
-                    <a href="./albumDetail.html">
-                        <img src="./img/album/cover1.jpg" alt="Album 1">
-                        <span class="name_album">Space Melody</span>
-                        <span><a class="name_artist" href="#">VIZE</a></span>
-                        <span class="play-icon-song material-icons">play_circle_outline</span>
-                    </a>
-                </div>
-                <div class="album" >
-                    <a href="./albumDetail.html">
-                        <img src="./img/album/cover2.jpg" alt="Album 2">
-                        <span class="name_album">B.S.N.L</span>
-                        <span><a class="name_artist" href="#">Bray</a></span>
-                        <span class="play-icon-song material-icons">play_circle_outline</span>
-                    </a>
-                </div>
-            </div>
-        </div>
+        <script>
+                        const songList = document.getElementById("songList");
+                    
+                        async function fetchSongs(albumID) {
+                            try {
+                                var formData = new FormData();
+                                formData.append("albumID", albumID);
+                                const response = await fetch(`http://localhost:3000/be/getSongInAlbum.php?albumID=${albumID}`, {
+                                    method: "GET",
+                                }); // Cập nhật đường dẫn
+                                
+                                const songs = await response.json();
+                                return songs;
+                            } catch (error) {
+                                console.error('Lỗi khi lấy dữ liệu bài hát:', error);
+                                return [];
+                            }
+                        }
+                    
+                        async function displaySongs() {
+                            const songs = await fetchSongs(<?php echo $Id;?>);
+                    
+                            songs.forEach((song) => {
+                                const listItem = document.createElement('li');
+                                listItem.className = 'single-item';
+                                listItem.onclick = () => listen(song);
+                    
+                                listItem.innerHTML = `
+                                    <a class="single-item__cover">
+                                        <img src="${song.image}" alt="Ảnh Album">                                       
+                                    </a>
+                                    <div class="single-item__title">
+                                        <h4><a href="#">${song.trackname}</a></h4>
+                                        <span><a href="artist.html">${song.stage_name}</a></span>
+                                    </div>
+                                    <span class="single-item__time">${song.listen}</span>
+                                `;
+                    
+                                const audioLink = document.createElement('a');
+                                audioLink.setAttribute('data-playlist', '');
+                                audioLink.setAttribute('data-title', song.trackname);
+                                audioLink.setAttribute('data-artist', song.stage_name);
+                                audioLink.setAttribute('data-img', song.image);
+                                audioLink.setAttribute('href', song.source);
+                                listItem.appendChild(audioLink);
+                    
+                                songList.appendChild(listItem);
+                            });
+                        }
+                    
+                        displaySongs();
+                    </script>
     </div>
     <script>
-        function listen(element) {
-            document.querySelector('#audio').pause()
-            document.querySelector('#audio').currentTime = 0
-            fetch("backend/edit.php?track_listen=" + element.querySelector('a.single-item__cover').getAttribute('track_id'))
-                .then((response) => response.json())
-
-            document.querySelector('.player__content span b').textContent = element.querySelector('span').textContent + ". " + element.querySelector('h4').textContent
-            document.querySelector('.player__content span span').textContent = element.querySelector('.single-item__title span').textContent
-            document.querySelector('.player__cover img').src = element.querySelector('img').src
-            document.querySelector('.player__content').parentNode.classList.remove('d-none')
-            document.querySelector('#audio').play()
-        }
-    </script>
+                    const audioElement = document.getElementById("audio");
+                
+                    function listen(song) {
+                        audioElement.pause();
+                        audioElement.currentTime = 0;
+                        document.querySelector('.player__content span b').textContent = `${song.stage_name}. ${song.trackname}`;
+                        document.querySelector('.player__content span span').textContent = song.stage_name;
+                        document.querySelector('.player__cover img').src = song.image;
+                        document.querySelector('.player__content').parentNode.classList.remove('d-none');
+                        audioElement.src = song.source;
+                        audioElement.play();
+                    }
+                </script>
+    <div class="additional-details">
+        <div class="info-more">
+            <h3>Thông tin </h3>
+            <p><?php echo $detail[0]["about"];?></p>
+        </div>
+    </div>
     <!-- share -->
     <div class="share">
         <a href="#" class="share__link share__link--fb"><svg width="9" height="17"
@@ -260,6 +273,44 @@
             </svg> share</a>
     </div>
     <!-- end share-->
+    
+    <div class="additional-details">
+        <div class="other-album">
+            <h3><a href="/fe/albums.html">Tất cả Album</a></h3>
+            <div class="album-container">
+            <script>
+                const albumResult = document.querySelector(".album-container");
+
+                async function layDuLieuAlbum() {
+                    try {
+                        const phanHoi = await fetch("../be/getAlbum.php");
+                        const albums = await phanHoi.json();
+                        return albums;
+                    } catch (loi) {
+                        console.error('Lỗi khi lấy dữ liệu album:', loi);
+                        return [];
+                    }
+                }
+
+                (async () => {
+                    const albums = await layDuLieuAlbum();
+
+                    albums.forEach((item) => {
+                        albumResult.innerHTML += `
+                        <div class="album">
+                            <a href="./albumDetail.php?albumID=${item.release_id}" class="album">
+                                <img src="${item.image}" alt="ảnh Album">
+                                <span>
+                                    ${item.rel_name}
+                                </span>
+                            </a>
+                        </div>`;
+                    });
+                })();
+            </script>
+        </div>
+        </div>
+    </div>
 </div>
 <!-- end content -->
 
@@ -289,7 +340,7 @@
                 <h6 class="footer__title">Thông tin trang</h6>
                 <div class="footer__nav">
                     <a href="#">Về chúng tôi</a>
-                    <a href="#">Tài khoản</a>
+                    <a href="./profile.html">Tài khoản</a>
                     <a href="./contacts.html">Liên hệ</a>
                 </div>
             </div>
@@ -306,9 +357,9 @@
             <div class="col-md">
                 <h6 class="footer__title">Trợ giúp</h6>
                 <div class="footer__nav">
-                    <a href="#">Tài khoản</a>
-                    <a href="#">Hỗ trợ đa thiết bị</a>
-                    <a href="#">Khả năng tiếp cận</a>
+                    <a href="./contacts.html">Tài khoản</a>
+                    <a href="./contacts.html">Hỗ trợ đa thiết bị</a>
+                    <a href="./contacts.html">Khả năng tiếp cận</a>
                 </div>
             </div>
         </div>
@@ -421,7 +472,6 @@
 </footer>
 <!-- end footer -->
 
-<!-- <script src="./js/albums.js"> </script> -->
 <script src="./js/home.js"></script>
 <script src="./js/user-menu.js"> </script>
 

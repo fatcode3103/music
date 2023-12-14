@@ -1083,6 +1083,9 @@ button {
 .other-album{
   width: 35%;
 }
+.other-album a{
+  color: #fff;
+}
 .additional-details h3 {
   color: #fff;
   font-size: 24px;
@@ -1795,3 +1798,41 @@ button {
   font-size: 12px;
 }
 
+.additional-details {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent items from wrapping to the next line */
+}
+
+.other-album {
+  /* Add any styles you need for other-album container */
+}
+
+.album-container {
+  display: flex;
+  flex-wrap: nowrap;
+ 
+}
+
+.album {
+  margin-right: 10px; /* Adjust the margin as needed */
+  /* Add any styles you need for the individual album items */
+}
+
+.album a {
+  display: flex;
+  flex-direction: column; /* Align image and text in a column */
+  align-items: center; /* Center items horizontally */
+  text-align: center; /* Center text */
+  text-decoration: none;
+  color: white; /* Adjust the color as needed */
+}
+
+.album img {
+  width: 100%; /* Make the image fill the container */
+  max-width: 150px; /* Set a maximum width for the image */
+  height: auto; /* Maintain the aspect ratio of the image */
+}
+
+.album span {
+  margin-top: 5px; /* Add spacing between image and text */
+}

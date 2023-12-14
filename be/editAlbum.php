@@ -12,7 +12,7 @@ if ( $_POST['release_id'] != "")
         $id = $_POST['release_id'];
 
         $alb = new Release();
-        $data = [$name, $img, $about,$si_id,$id];
+        $data = [$name, $about, $img, $si_id,$id];
         $res = $alb->editAlbumById($data);
 
         if ($res === true) {

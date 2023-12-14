@@ -340,7 +340,7 @@ $songs = DB::execute($query,$data);
                 <h6 class="footer__title">Thông tin trang</h6>
                 <div class="footer__nav">
                     <a href="#">Về chúng tôi</a>
-                    <a href="#">Tài khoản</a>
+                    <a href="./profile.html">Tài khoản</a>
                     <a href="./contacts.html">Liên hệ</a>
                 </div>
             </div>
@@ -357,9 +357,9 @@ $songs = DB::execute($query,$data);
             <div class="col-md">
                 <h6 class="footer__title">Trợ giúp</h6>
                 <div class="footer__nav">
-                    <a href="#">Tài khoản</a>
-                    <a href="#">Hỗ trợ đa thiết bị</a>
-                    <a href="#">Khả năng tiếp cận</a>
+                    <a href="./contacts.html">Tài khoản</a>
+                    <a href="./contacts.html">Hỗ trợ đa thiết bị</a>
+                    <a href="./contacts.html">Khả năng tiếp cận</a>
                 </div>
             </div>
         </div>
